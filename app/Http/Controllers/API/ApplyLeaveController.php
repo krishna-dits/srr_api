@@ -14,6 +14,11 @@ class ApplyLeaveController extends Controller
         return response()->json(['success'=>1, 'data'=>$leave], 200,[],JSON_NUMERIC_CHECK);
     }
 
+    public function get_leave_by_user(Request $request){
+        $leave = ApplyLeave::whereUserId($request->user()->id)->get();
+        return response()->json(['success'=>1, 'data'=>$leave], 200,[],JSON_NUMERIC_CHECK);
+    }
+
     public function save_leaves(Request $request){
         $requestedData = (object)$request->json()->all();
 
@@ -33,8 +38,7 @@ class ApplyLeaveController extends Controller
         $leave->to_date = $requestedData->to_date;
         $leave->total_days = $requestedData->total_days;
         $leave->status = $requestedData->status;
-//        $leave->applied_by = $request->user()->id;
-        $leave->applied_by = $requestedData->user_id;
+        $leave->applied_by = $request->user()->id ?? $requestedData->user_id;
         $leave->save();
 
         $leaveAllocation->total = $leaveAllocation->total - $requestedData->total_days;
@@ -77,6 +81,9 @@ class ApplyLeaveController extends Controller
     public function delete_leaves($id){
         $leave = ApplyLeave::find($id);
         $leave->delete();
+        return response()->json(['success'=>1, 'data'=>$leave], 200,[],JSON_NUMERIC_CHECK);
     }
+
+
 
 }
