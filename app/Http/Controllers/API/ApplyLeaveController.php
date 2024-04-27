@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\ApplyLeaveResource;
 use App\Models\ApplyLeave;
 use App\Models\LeaveAllocation;
 use Illuminate\Http\Request;
@@ -12,13 +13,13 @@ class ApplyLeaveController extends Controller
     public function get_leaves()
     {
         $leave = ApplyLeave::get();
-        return response()->json(['success' => 1, 'data' => $leave], 200, [], JSON_NUMERIC_CHECK);
+        return response()->json(['success' => 1, 'data' =>ApplyLeaveResource::collection($leave)], 200, [], JSON_NUMERIC_CHECK);
     }
 
     public function get_leave_by_user(Request $request)
     {
         $leave = ApplyLeave::whereUserId($request->user()->id)->get();
-        return response()->json(['success' => 1, 'data' => $leave], 200, [], JSON_NUMERIC_CHECK);
+        return response()->json(['success' => 1, 'data' =>ApplyLeaveResource::collection($leave)], 200, [], JSON_NUMERIC_CHECK);
     }
 
     public function save_leaves(Request $request)
@@ -47,7 +48,7 @@ class ApplyLeaveController extends Controller
         $leaveAllocation->total = $leaveAllocation->total - $requestedData->total_days;
         $leaveAllocation->save();
 
-        return response()->json(['success' => 1, 'data' => $leave], 200, [], JSON_NUMERIC_CHECK);
+        return response()->json(['success' => 1, 'data' =>new ApplyLeaveResource($leave)], 200, [], JSON_NUMERIC_CHECK);
     }
 
     public function update_leaves(Request $request)
@@ -79,14 +80,14 @@ class ApplyLeaveController extends Controller
         $leave->status = $requestedData->status;
         $leave->update();
 
-        return response()->json(['success' => 1, 'data' => $leave], 200, [], JSON_NUMERIC_CHECK);
+        return response()->json(['success' => 1, 'data' =>new ApplyLeaveResource($leave)], 200, [], JSON_NUMERIC_CHECK);
     }
 
     public function delete_leaves($id)
     {
         $leave = ApplyLeave::find($id);
         $leave->delete();
-        return response()->json(['success' => 1, 'data' => $leave], 200, [], JSON_NUMERIC_CHECK);
+        return response()->json(['success' => 1, 'data' =>new ApplyLeaveResource($leave)], 200, [], JSON_NUMERIC_CHECK);
     }
 
 
