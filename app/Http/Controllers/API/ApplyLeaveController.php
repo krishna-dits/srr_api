@@ -9,26 +9,29 @@ use Illuminate\Http\Request;
 
 class ApplyLeaveController extends Controller
 {
-    public function get_leaves(){
+    public function get_leaves()
+    {
         $leave = ApplyLeave::get();
-        return response()->json(['success'=>1, 'data'=>$leave], 200,[],JSON_NUMERIC_CHECK);
+        return response()->json(['success' => 1, 'data' => $leave], 200, [], JSON_NUMERIC_CHECK);
     }
 
-    public function get_leave_by_user(Request $request){
+    public function get_leave_by_user(Request $request)
+    {
         $leave = ApplyLeave::whereUserId($request->user()->id)->get();
-        return response()->json(['success'=>1, 'data'=>$leave], 200,[],JSON_NUMERIC_CHECK);
+        return response()->json(['success' => 1, 'data' => $leave], 200, [], JSON_NUMERIC_CHECK);
     }
 
-    public function save_leaves(Request $request){
+    public function save_leaves(Request $request)
+    {
         $requestedData = (object)$request->json()->all();
 
         $leaveAllocation = LeaveAllocation::whereLeaveTypeId($requestedData->leave_type_id)
             ->whereUserId($requestedData->user_id ?? $request->user()->id)->first();
-        if(!$leaveAllocation){
-            return response()->json(['success'=>0, 'data'=> null, 'message' => 'Leave not allocated'], 200,[],JSON_NUMERIC_CHECK);
+        if (!$leaveAllocation) {
+            return response()->json(['success' => 0, 'data' => null, 'message' => 'Leave not allocated'], 200, [], JSON_NUMERIC_CHECK);
         }
-        if($leaveAllocation->total < $requestedData->total_days){
-            return response()->json(['success'=>0, 'data'=> null, 'message' => 'Leave not available'], 200,[],JSON_NUMERIC_CHECK);
+        if ($leaveAllocation->total < $requestedData->total_days) {
+            return response()->json(['success' => 0, 'data' => null, 'message' => 'Leave not available'], 200, [], JSON_NUMERIC_CHECK);
         }
 
         $leave = new ApplyLeave();
@@ -44,10 +47,11 @@ class ApplyLeaveController extends Controller
         $leaveAllocation->total = $leaveAllocation->total - $requestedData->total_days;
         $leaveAllocation->save();
 
-        return response()->json(['success'=>1, 'data'=>$leave], 200,[],JSON_NUMERIC_CHECK);
+        return response()->json(['success' => 1, 'data' => $leave], 200, [], JSON_NUMERIC_CHECK);
     }
 
-    public function update_leaves(Request $request){
+    public function update_leaves(Request $request)
+    {
         $requestedData = (object)$request->json()->all();
 
         $leaveAllocation = LeaveAllocation::whereLeaveTypeId($requestedData->leave_type_id)
@@ -58,14 +62,14 @@ class ApplyLeaveController extends Controller
         $leave->from_date = $requestedData->from_date;
         $leave->to_date = $requestedData->to_date;
 
-        if($leave->total_days > $requestedData->total_days){
+        if ($leave->total_days > $requestedData->total_days) {
             $remaining = $leave->total_days - $requestedData->total_days;
             $leaveAllocation->total += $remaining;
             $leaveAllocation->update();
-        }else{
+        } else {
             $remaining = $requestedData->total_days - $leave->total_days;
-            if($leaveAllocation->total < $remaining){
-                return response()->json(['success'=>0, 'data'=> null, 'message' => 'Leave not available'], 200,[],JSON_NUMERIC_CHECK);
+            if ($leaveAllocation->total < $remaining) {
+                return response()->json(['success' => 0, 'data' => null, 'message' => 'Leave not available'], 200, [], JSON_NUMERIC_CHECK);
             }
             $leaveAllocation->total -= $remaining;
             $leaveAllocation->update();
@@ -75,15 +79,15 @@ class ApplyLeaveController extends Controller
         $leave->status = $requestedData->status;
         $leave->update();
 
-        return response()->json(['success'=>1, 'data'=>$leave], 200,[],JSON_NUMERIC_CHECK);
+        return response()->json(['success' => 1, 'data' => $leave], 200, [], JSON_NUMERIC_CHECK);
     }
 
-    public function delete_leaves($id){
+    public function delete_leaves($id)
+    {
         $leave = ApplyLeave::find($id);
         $leave->delete();
-        return response()->json(['success'=>1, 'data'=>$leave], 200,[],JSON_NUMERIC_CHECK);
+        return response()->json(['success' => 1, 'data' => $leave], 200, [], JSON_NUMERIC_CHECK);
     }
-
 
 
 }
