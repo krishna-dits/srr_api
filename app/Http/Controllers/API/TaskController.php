@@ -7,34 +7,13 @@ use App\Http\Resources\TaskResource;
 use App\Models\Task;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Validator;
+
 
 class TaskController extends Controller
 {
     public function create(Request $request)
     {
         try {
-            $validation = Validator::make($request->all(), [
-                'title'         => 'required|max:255',
-                'description'   => 'nullable',
-                'start_date'    => 'required|date|after_or_equal:now',
-                'end_date'      => 'required|date|after_or_equal:start_date',
-                'user_ids'      => 'required',
-                'user_ids.*'    => 'required|exists:users,id',
-                'priority'      => 'required|in:high,medium,low,high urgent',
-                'category_id'   => 'required|numeric',
-                'document'      => 'nullable'
-                // 'project_id'    => 'required|numeric',
-            ]);
-
-            if ($validation->fails()) {
-                return response()->json([
-                    'status'    => false,
-                    'message'   => 'Validation fail',
-                    'errors'    => $validation->errors(),
-                ], 400);
-            }
-
             $filename = null;
             if ($request->hasfile('document')) {
                 $file = $request->file('document');
@@ -51,7 +30,7 @@ class TaskController extends Controller
                 'assign_user_id' => Auth::id(),
                 'priority'       => $request->priority,
                 'category_id'    => $request->category_id,
-                // 'project_id'     => $request->project_id,
+                'project_id'     => $request->project_id,
                 'status'         => 'pending',
                 'document'       => $filename,
             ];
@@ -59,24 +38,12 @@ class TaskController extends Controller
             $task = Task::create($data);
 
             if ($task) {
-                return response()->json([
-                    'status'    => true,
-                    'message'   => 'Task created successfully.',
-                    'errors'    => null,
-                ], 201);
+                return response()->json(['success' => 1, 'message' => 'Task created successfully.'], 200);
             } else {
-                return response()->json([
-                    'status'    => false,
-                    'message'   => 'Fail',
-                    'errors'    => null,
-                ], 400);
+                return response()->json(['success' => 0, 'message' => 'Something went wrong.'], 400);
             }
         } catch (\Throwable $th) {
-            return response()->json([
-                'status'    => false,
-                'message'   => 'Internal server errors.',
-                'errors'    => $th,
-            ], 500);
+            return response()->json(['success' => 0, 'message' => 'Internal server errors.'], 500);
         }
     }
 
@@ -85,26 +52,6 @@ class TaskController extends Controller
     {
         try {
             $task = Task::where('id', $id)->withTrashed()->first();
-            $validation = Validator::make($request->all(), [
-                'title'         => 'required|max:255',
-                'description'   => 'nullable',
-                'start_date'    => 'required|date|after_or_equal:now',
-                'end_date'      => 'required|date|after_or_equal:start_date',
-                'user_ids'      => 'required',
-                'user_ids.*'    => 'required|exists:users,id',
-                'priority'      => 'required|in:high,medium,low,high urgent',
-                'category_id'   => 'required|numeric',
-                'document'      => 'nullable'
-                // 'project_id'    => 'required|numeric',
-            ]);
-
-            if ($validation->fails()) {
-                return response()->json([
-                    'status'    => false,
-                    'message'   => 'Validation fail',
-                    'errors'    => $validation->errors(),
-                ], 400);
-            }
 
             $filename = $task->document;
             if ($request->hasfile('document')) {
@@ -122,7 +69,7 @@ class TaskController extends Controller
                 'assign_user_id' => Auth::id(),
                 'priority'       => $request->priority,
                 'category_id'    => $request->category_id,
-                // 'project_id'     => $request->project_id,
+                'project_id'     => $request->project_id,
                 'status'         => 'pending',
                 'document'       => $filename,
             ];
@@ -130,66 +77,46 @@ class TaskController extends Controller
             $task->update($data);
 
             if ($task) {
-                return response()->json([
-                    'status'    => true,
-                    'message'   => 'Task updated successfully.',
-                    'errors'    => null,
-                ], 200);
+                return response()->json(['success' => 1, 'message' => 'Task updated successfully.'], 200);
             } else {
-                return response()->json([
-                    'status'    => false,
-                    'message'   => 'Fail',
-                    'errors'    => null,
-                ], 400);
+                return response()->json(['success' => 0, 'message' => 'Something went wrong.'], 400);
             }
         } catch (\Throwable $th) {
-            return response()->json([
-                'status'    => false,
-                'message'   => 'Internal server errors.',
-                'errors'    => $th,
-            ], 500);
+            return response()->json(['success' => 0, 'message' => 'Internal server errors.'], 500);
         }
     }
 
-
-    public function get(Request $request)
+    public function get_task(Request $request)
     {
         try {
             if ($request->category_id && $request->status && $request->priority) {
 
-                $tasks = TaskResource::collection(Task::where('category_id', $request->category_id)->where('status', $request->status)->where('priority', $request->priority)->get());
+                $tasks = Task::whereCategoryId($request->category_id)->whereStatus($request->status)->wherePriority($request->priority)->get();
             } elseif ($request->category_id && $request->priority) {
 
-                $tasks = TaskResource::collection(Task::where('category_id', $request->category_id)->where('priority', $request->priority)->get());
+                $tasks = Task::whereCategoryId($request->category_id)->wherePriority($request->priority)->get();
             } elseif ($request->status && $request->priority) {
 
-                $tasks = TaskResource::collection(Task::where('priority', $request->priority)->where('status', $request->status)->get());
+                $tasks = Task::wherePriority($request->priority)->whereStatus($request->status)->get();
             } elseif ($request->category_id && $request->status) {
 
-                $tasks = TaskResource::collection(Task::where('category_id', $request->category_id)->where('status', $request->status)->get());
+                $tasks = Task::whereCategoryId($request->category_id)->whereStatus($request->status)->get();
             } elseif ($request->category_id) {
 
-                $tasks = TaskResource::collection(Task::where('category_id', $request->category_id)->get());
+                $tasks = Task::whereCategoryId($request->category_id)->get();
             } elseif ($request->status) {
 
-                $tasks = TaskResource::collection(Task::where('status', $request->status)->get());
+                $tasks = Task::whereStatus($request->status)->get();
             } elseif ($request->priority) {
 
-                $tasks = TaskResource::collection(Task::where('priority', $request->priority)->get());
+                $tasks = Task::wherePriority($request->priority)->get();
             } else {
-                $tasks = TaskResource::collection(Task::get());
+                $tasks = Task::get();
             }
 
-            return response()->json([
-                'status'    => true,
-                'task'      => $tasks,
-            ], 200);
+            return response()->json(['success' => 1, 'task' => TaskResource::collection($tasks)], 200);
         } catch (\Throwable $th) {
-            return response()->json([
-                'status'    => false,
-                'message'   => 'Internal server errors.',
-                'errors'    => $th,
-            ], 500);
+            return response()->json(['success' => 0, 'message' => 'Internal server errors.'], 500);
         }
     }
 }

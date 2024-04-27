@@ -43,7 +43,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::prefix('task')->group(function () {
         Route::post('create', [TaskController::class, 'create']);
         Route::post('update/{id}', [TaskController::class, 'update']);
-        Route::post('get', [TaskController::class, 'get']);
+        Route::post('get', [TaskController::class, 'get_task']);
     });
 
 
@@ -71,8 +71,6 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('applyLeaves', [ApplyLeaveController::class, 'save_leaves']);
     Route::post('updateLeaves', [ApplyLeaveController::class, 'update_leaves']);
     Route::get('deleteLeaves/{id}', [ApplyLeaveController::class, 'delete_leaves']);
-
-
 });
 
 
