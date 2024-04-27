@@ -8,7 +8,8 @@ use GuzzleHttp\Middleware;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\NoteController;
-
+use App\Http\Controllers\API\LeaveTypeController;
+use App\Http\Controllers\API\LeaveAllocationController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -29,7 +30,24 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 // LOGIN USER
 Route::post('/login', [AuthController::class, 'loginUser']);
 
-Route::get('/test', [NoteController::class, 'get_notes']);
+//NOTES
+Route::get('getNotes', [NoteController::class, 'get_notes']);
+Route::post('saveNotes', [NoteController::class, 'save_notes']);
+Route::post('updateNotes', [NoteController::class, 'update_notes']);
+Route::get('deleteNotes/{id}', [NoteController::class, 'delete_notes']);
+
+//LEAVE TYPE
+Route::get('getLeaveType', [LeaveTypeController::class, 'get_leave_type']);
+Route::post('saveLeaveType', [LeaveTypeController::class, 'save_leave_type']);
+Route::post('updateLeaveType', [LeaveTypeController::class, 'update_leave_type']);
+Route::get('deleteLeaveType/{id}', [LeaveTypeController::class, 'delete_leave_type']);
+
+//LEAVE ALLOCATIONS
+Route::get('getLeaveAllocation', [LeaveAllocationController::class, 'get_leave_allocation']);
+Route::post('saveLeaveAllocation', [LeaveAllocationController::class, 'save_leave_allocation']);
+Route::post('updateLeaveAllocation', [LeaveAllocationController::class, 'update_leave_allocation']);
+Route::get('deleteLeaveAllocation/{id}', [LeaveAllocationController::class, 'delete_leave_allocation']);
+
 
 
 // LOGOUT USER
