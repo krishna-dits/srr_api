@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html>
+   <title>UTKARSH</title>
+   <meta charset="utf-8">
+   <body>
+      <style>
+         @page {
+         size: A4 landscape;
+         margin: 0;
+         / change the margins as you want them to be. /
+         }
+         @media print {
+         html, body {
+         width:25cm;
+         height:33cm;
+         margin: 0 !important;
+         padding: 5px !important;
+         overflow: hidden;
+         }
+         }
+         body
+         {
+         font-family: sans-serif;
+         background: #ffffff;
+         margin: 0 auto;
+         height: 33cm;
+         width:100%;
+         }
+         table, th, td {
+         border-collapse: collapse;
+         }
+         tr
+         {
+         width: 100%;
+         height: auto;
+         }
+      </style>
+      <div style="padding: 0px 7px 0px 7px; ">
+         <!-- ==========================================code here================================== -->
+          <table style="width: 100%;margin-top:-1%;">
+            <p style="padding-left: 86%;"> <span style="color: #000; font-size: 11px;">IS 1239 PART(1):2004</span><br>
+               <img src="{{asset('public')}}/printasset/isi.png" style="width: 30px;margin-top: %;margin-left:2%;">  <img src="{{asset('public')}}/printasset/boxdesign1.jpg" style="width: 30px;margin-top: 1%;"><br> <span style="color: #000; font-size: 11px;">CM/L:5085766</span>
+            </p>
+         </table>
+         <table  width="100%" style="width:96%;margin-left:-2%;">
+            <tr>
+                <hr style="border-top: 1px solid #6cbc4f; width: 83%; margin-top: -22px;margin-bottom:20px;margin-left:14%; ">
+               <th style="width: 0%; text-align: left;">
+                  <img src="{{asset('public')}}/printasset/utkarsh-logo.png" style="width: 127px; margin-left: 5%;">
+               </th>
+              
+               <td style="text-align:right ; color: #204f7d;font-size: 17px;font-weight: 700;"> <span style="">TEST CERTIFICATE</span><br> <b style="font-size: 11px; color: #000; font-weight: 700;">Format No F/08/17/R-02</b></td>
+            </tr>
+         </table>
+         <table style="width: 98%; margin: 0px 0px 0px 28px;border: 1px solid #899499;border-collapse: collapse; background-color:#6cbc4f;margin-top: -%; ">
+            <tr >
+               <th
+                  >
+                  <span style="display:inline-block;line-height:10px;font-size: 12px;color:#000; margin-bottom: 7px; text-align: justify; font-weight: 300; margin-left: 10%;">
+                  Product
+                  </span>
+                  <span  style="width:63%;display:inline-block;text-transform:uppercase;line-height:normal;text-indent:15px;font-size:12px;font-family:'Font Awesome 5 Free';font-style:normal;color:#000;font-weight:600;border-bottom:1px dashed #000;text-transform:uppercase;margin-bottom: 7px; text-align: justify;"> Mild Steel Black Tubes (ERW)
+                  </span>
+               </th>
+               <th
+                  >
+                  <span style="display:inline-block;line-height:10px;font-size: 12px;color:#000; margin-bottom: 7px; text-align: justify; font-weight: 300;">
+                  Conforms to IS
+                  </span>
+                  <span  style="width:64%;display:inline-block;text-transform:uppercase;line-height:normal;text-indent:15px;font-size:12px;font-family:'Font Awesome 5 Free';font-style:normal;color:#000;font-weight:600;border-bottom:1px dashed #000;text-transform:uppercase;margin-bottom: 7px; text-align: justify;"> IS 1239 Part(I):2004
+                  </span>
+               </th>
+               <th
+                  >
+               </th>
+            </tr>
+            <tr >
+               <th
+                  >
+                  <span style="display:inline-block;line-height:10px;font-size: 12px;color:#000; margin-bottom: 7px; text-align: justify; font-weight: 300;margin-left: 10%;">
+                  To M/s
+                  </span>
+                  <span  style="width:64%;display:inline-block;text-transform:uppercase;line-height:normal;text-indent:15px;font-size:12px;font-family:'Font Awesome 5 Free';font-style:normal;color:#000;font-weight:600;border-bottom:1px dashed #000;text-transform:uppercase;margin-bottom: 7px; text-align: justify;"> Kalyani Alloy Castings LTD.
+                  </span>
+               </th>
+               <th
+                  >
+                  <span style="display:inline-block;line-height:10px;font-size: 12px;color:#000; margin-bottom: 7px; text-align: justify; font-weight: 300;">
+                  TC No.
+                  </span>
+                  <span  style="width:75%;display:inline-block;text-transform:uppercase;line-height:normal;text-indent:15px;font-size:12px;font-family:'Font Awesome 5 Free';font-style:normal;color:#000;font-weight:600;border-bottom:1px dashed #000;text-transform:uppercase;margin-bottom: 7px; text-align: justify;"> Tube/23-24/39/01274
+                  </span>
+               </th>
+               <th
+                  >
+                  <span style="display:inline-block;line-height:10px;font-size: 12px;color:#000; margin-bottom: 7px; text-align: justify; font-weight: 300;">
+                  Date 
+                  </span>
+                  <span  style="width:63%;display:inline-block;text-transform:uppercase;line-height:normal;text-indent:15px;font-size:12px;font-family:'Font Awesome 5 Free';font-style:normal;color:#000;font-weight:600;border-bottom:1px dashed #000;text-transform:uppercase;margin-bottom: 7px; text-align: justify;"> 13-08-2023
+                  </span>
+               </th>
+            </tr>
+            <tr >
+               <th
+                  >
+                  <span style="display:inline-block;line-height:10px;font-size: 12px;color:#000; margin-bottom: 7px; text-align: justify; font-weight: 300;margin-left: 10%;">
+                  Address
+                  </span>
+                  <span  style="width:63%;display:inline-block;text-transform:uppercase;line-height:normal;text-indent:15px;font-size:12px;font-family:'Font Awesome 5 Free';font-style:normal;color:#000;font-weight:600;border-bottom:1px dashed #000;text-transform:uppercase;margin-bottom: 7px; text-align: justify;">Chandrani More, Muragacha
+                  </span>
+               </th>
+               <th
+                  >
+                  <span style="display:inline-block;line-height:10px;font-size: 12px;color:#000; margin-bottom: 7px; text-align: justify; font-weight: 300;">
+                  Invoice No.
+                  </span>
+                  <span  style="width:70%;display:inline-block;text-transform:uppercase;line-height:normal;text-indent:15px;font-size:12px;font-family:'Font Awesome 5 Free';font-style:normal;color:#000;font-weight:600;border-bottom:1px dashed #000;text-transform:uppercase;margin-bottom: 7px; text-align: justify;">J003686/23-24
+                  </span>
+               </th>
+               <th
+                  >
+                  <span style="display:inline-block;line-height:10px;font-size: 12px;color:#000; margin-bottom: 7px; text-align: justify; font-weight: 300;">
+                  Date 
+                  </span>
+                  <span  style="width:65%;display:inline-block;text-transform:uppercase;line-height:normal;text-indent:15px;font-size:12px;font-family:'Font Awesome 5 Free';font-style:normal;color:#000;font-weight:600;border-bottom:1px dashed #000;text-transform:uppercase;margin-bottom: 7px; text-align: justify;"> 13-08-2023
+                  </span>
+               </th>
+            </tr>
+            <tr >
+               <th
+                  >
+                  <span style="display:inline-block;line-height:10px;font-size: 12px;color:#000; margin-bottom: 7px; text-align: justify; font-weight: 300;margin-left: 10%;">
+                  </span>
+                  <span  style="width:72%;display:inline-block;text-transform:uppercase;line-height:normal;text-indent:15px;font-size:12px;font-family:'Font Awesome 5 Free';font-style:normal;color:#000;font-weight:600;border-bottom:1px dashed #000;text-transform:uppercase;margin-bottom: 7px; text-align: justify;">Road Kalyani,Nadia
+                  </span>
+               </th>
+               <th
+                  >
+                  <span style="display:inline-block;line-height:10px;font-size: 12px;color:#000; margin-bottom: 7px; text-align: justify; font-weight: 300;">
+                  P O.D O
+                  </span>
+                  <span  style="width:73%;display:inline-block;text-transform:uppercase;line-height:normal;text-indent:15px;font-size:12px;font-family:'Font Awesome 5 Free';font-style:normal;color:#000;font-weight:600;border-bottom:1px dashed #000;text-transform:uppercase;margin-bottom: 7px; text-align: justify;">OMBP/000566/23-24
+                  </span>
+               </th>
+               <th
+                  >
+                  <span style="display:inline-block;line-height:10px;font-size: 12px;color:#000; margin-bottom: 7px; text-align: justify; font-weight: 300;">
+                  Date 
+                  </span>
+                  <span  style="width:63%;display:inline-block;text-transform:uppercase;line-height:normal;text-indent:15px;font-size:12px;font-family:'Font Awesome 5 Free';font-style:normal;color:#000;font-weight:600;border-bottom:1px dashed #000;text-transform:uppercase;margin-bottom: 7px; text-align: justify;"> 13-08-2023
+                  </span>
+               </th>
+            </tr>
+         </table>
+          
+         <table style="width: 96%;margin-top: -3%; margin-bottom: 10px;">
+            <p style="font-size: 11px; margin-left: 5%;">We certify that the material described below fully conforms to <b>IS 1239 Part(I):2004</b>Chemical composition & physical properties of the product as tested in accordance with scheme of Testing and Inspection<br> 
+Contained in the BIS certifications Marks L/C No. CM/L<b>5085766</b> are as indicated in your order (Please refer to <b>IS 1239 Part(I):2004</b>for details of specification requirements</p>
+         </table>
+         <table cellspacing="0" border="1" width="100%" style="text-align:center;width:95%;margin: 0 auto;margin-top: px;background-color:#e2e2e2;">
+            <!--Marksheet Table Heading Start-->
+           
+              <tr>
+                <th style="font-size: 10px;border-bottom: none; margin-top: %;">Sl No</th>
+                <th style="font-size: 10px; border-bottom: none;">Description<br>Type X OD X Thickness x Grade X Surface
+                    Condition X Ends
+                </th>
+                <th style="font-size: 10px;border-bottom: none;">Cast/ID No.</th>
+                <th style="font-size: 10px; border-bottom: none;">Quantity<br>Pcs/Mtr/MT</th>
+                <th colspan="5"style="font-size: 10px;">Chemical Composition</th>
+                <th colspan="3"style="font-size: 10px;">Mechanical property</th>
+                <th style="font-size:11px; border-bottom: none;">Bend Test</th>
+                <th rowspan="2"style="font-size: 10px;">Flattering<br>Test</th>
+                <th rowspan="2"style="font-size: 10px;">Drift
+                    Expansion Test</th>
+                <th colspan="5"style="font-size: 10px;">Galvanizing Coating Test</th>
+                <th style="font-size: 10px; border-bottom: none;">Remarks</th>
+            </tr>
+            <tr>
+               <th style="border-top: none;"></th>
+               <th style="border-top: none;"></th>
+               <th style="border-top: none;"></th>
+               <th style="border-top: none;"></th>
+               <th style="font-size: 10px;">C%</th>
+               <th style="font-size: 10px;">Mn%</th>
+               <th style="font-size: 10px;">P%</th>
+               <th style="font-size: 10px;">S%</th>
+               <th style="font-size: 10px;">CE%</th>
+
+               <th style="font-size: 10px;">Yst(Mpa)</th>
+               <th style="font-size: 10px;">Ust(Mpa)</th>
+               <th style="border-top: none;font-size: 10px;">Elong%</th>
+               <th style="border-top: none;"></th>
+
+               <th style="font-size: 10px;width: 80px;">Mass of Zn<br>gms/m<sup>2</sup></th>
+               <th style="font-size: 10px;width: 80px;">Uniformity test<br>5x1 min</th>
+               <th style="font-size:10px;">Coating Thicknes s (µ)</th>
+                <th style="font-size: 10px;">Adhesion Test</th>
+                 <th style="font-size: 10px;">Free Bore Test</th>
+               <th style="border-top: none;"></th>
+            </tr> 
+             <tr>
+              <td style="font-size: 10px;">Specified</td>
+              <td></td>
+              <td></td>
+              <td style="font-size: 10px;"><b>MT</b></td>
+              <td style="font-size: 10px;"><b>(Max)<br>0.20</b></td>
+              <td style="font-size: 10px;"><b>(Max)<br>1.30</b></td>
+              <td style="font-size: 10px;"><b>(Max)<br>0.040</b></td>
+              <td style="font-size: 10px;"><b>(Max)<br>1.30</b></td>
+              <td style="font-size: 10px;"><b>(Max)<br>0.040</b></td>
+              <td style="font-size: 10px;"><b>(Max)<br>0.040</b></td>
+              <td style="font-size: 10px;"><b>(Min)<br>NA</b></td>
+              <td style="font-size: 10px;"><b>(Min)<br>320</b></td>
+               <td style="font-size:10px;"><b>(Min)<br>12/20</b></td>
+               <td></td>
+               <td></td>
+               <td></td>
+               <td></td>
+               <td></td>
+               <td></td>
+               <td></td>
+               <td></td>
+            </tr>
+
+           
+             <tr>
+               <td style="font-size: 7px;">1</td>
+               <td style="font-size: 7px;;width: 150px;">ERW OD168.3MM <br> 5.4MM Fe410 GP BE</td>
+               <td style="font-size: 7px;">WD15A</td>
+               <td style="font-size: 7px;">0.670</td>
+               <td style="font-size: 7px;">0.80</td>
+               <td style="font-size: 7px;">0.41</td>
+               <td style="font-size: 7px;">0.022</td>
+               <td style="font-size: 7px;">0.007</td>
+               <td style="font-size: 7px;">NA</td>
+               <td style="font-size: 7px;">432</td>
+               <td style="font-size: 7px;">30</td>
+               <td style="font-size: 7px;">OK</td>
+               <td style="font-size: 7px;">NA</td>
+               <td style="font-size: 7px;">NA</td>
+               <td style="font-size: 7px;">NA</td>
+               <td style="font-size: 7px;">NA</td>
+               <td style="font-size: 7px;">NA</td>
+               <td style="font-size: 7px;">OK</td>
+                <td style="font-size: 7px;">NA</td>
+               <td style="font-size: 7px;">NA</td>
+               <td style="font-size: 7px;">OK</td>
+            </tr>
+              <tr>
+               <td style="font-size: 7px;">2</td>
+               <td style="font-size: 7px;;width: 150px;">ERW OD168.3MM <br> 5.4MM Fe410 GP BE</td>
+               <td style="font-size: 7px;">WD15A</td>
+               <td style="font-size: 7px;">0.670</td>
+               <td style="font-size: 7px;">0.80</td>
+               <td style="font-size: 7px;">0.41</td>
+               <td style="font-size: 7px;">0.022</td>
+               <td style="font-size: 7px;">0.007</td>
+               <td style="font-size: 7px;">NA</td>
+               <td style="font-size: 7px;">432</td>
+               <td style="font-size: 7px;">30</td>
+               <td style="font-size: 7px;">OK</td>
+               <td style="font-size: 7px;">NA</td>
+               <td style="font-size: 7px;">NA</td>
+               <td style="font-size: 7px;">NA</td>
+               <td style="font-size: 7px;">NA</td>
+               <td style="font-size: 7px;">NA</td>
+               <td style="font-size: 7px;">OK</td>
+                <td style="font-size: 7px;">NA</td>
+               <td style="font-size: 7px;">NA</td>
+               <td style="font-size: 7px;">OK</td>
+            </tr>
+             
+             <tr>
+               <td style="font-size: 7px;">3</td>
+               <td style="font-size: 7px;;width: 150px;">ERW OD168.3MM <br> 5.4MM Fe410 GP BE</td>
+               <td style="font-size: 7px;">WD15A</td>
+               <td style="font-size: 7px;">0.670</td>
+               <td style="font-size: 7px;">0.80</td>
+               <td style="font-size: 7px;">0.41</td>
+               <td style="font-size: 7px;">0.022</td>
+               <td style="font-size: 7px;">0.007</td>
+               <td style="font-size: 7px;">NA</td>
+               <td style="font-size: 7px;">432</td>
+               <td style="font-size: 7px;">30</td>
+               <td style="font-size: 7px;">OK</td>
+               <td style="font-size: 7px;">NA</td>
+               <td style="font-size: 7px;">NA</td>
+               <td style="font-size: 7px;">NA</td>
+               <td style="font-size: 7px;">NA</td>
+               <td style="font-size: 7px;">NA</td>
+               <td style="font-size: 7px;">OK</td>
+                <td style="font-size: 7px;">NA</td>
+               <td style="font-size: 7px;">NA</td>
+               <td style="font-size: 7px;">OK</td>
+            </tr>
+             
+         <tr>
+               <td style="font-size: 7px;">4</td>
+               <td style="font-size: 7px;;width: 150px;">ERW OD168.3MM <br> 5.4MM Fe410 GP BE</td>
+               <td style="font-size: 7px;">WD15A</td>
+               <td style="font-size: 7px;">0.670</td>
+               <td style="font-size: 7px;">0.80</td>
+               <td style="font-size: 7px;">0.41</td>
+               <td style="font-size: 7px;">0.022</td>
+               <td style="font-size: 7px;">0.007</td>
+               <td style="font-size: 7px;">NA</td>
+               <td style="font-size: 7px;">432</td>
+               <td style="font-size: 7px;">30</td>
+               <td style="font-size: 7px;">OK</td>
+               <td style="font-size: 7px;">NA</td>
+               <td style="font-size: 7px;">NA</td>
+               <td style="font-size: 7px;">NA</td>
+               <td style="font-size: 7px;">NA</td>
+               <td style="font-size: 7px;">NA</td>
+               <td style="font-size: 7px;">OK</td>
+                <td style="font-size: 7px;">NA</td>
+               <td style="font-size: 7px;">NA</td>
+               <td style="font-size: 7px;">OK</td>
+            </tr>
+              <tr>
+               <td style="font-size: 7px;">5</td>
+               <td style="font-size: 7px;;width: 150px;">ERW OD168.3MM <br> 5.4MM Fe410 GP BE</td>
+               <td style="font-size: 7px;">WD15A</td>
+               <td style="font-size: 7px;">0.670</td>
+               <td style="font-size: 7px;">0.80</td>
+               <td style="font-size: 7px;">0.41</td>
+               <td style="font-size: 7px;">0.022</td>
+               <td style="font-size: 7px;">0.007</td>
+               <td style="font-size: 7px;">NA</td>
+               <td style="font-size: 7px;">432</td>
+               <td style="font-size: 7px;">30</td>
+               <td style="font-size: 7px;">OK</td>
+               <td style="font-size: 7px;">NA</td>
+               <td style="font-size: 7px;">NA</td>
+               <td style="font-size: 7px;">NA</td>
+               <td style="font-size: 7px;">NA</td>
+               <td style="font-size: 7px;">NA</td>
+               <td style="font-size: 7px;">OK</td>
+                <td style="font-size: 7px;">NA</td>
+               <td style="font-size: 7px;">NA</td>
+               <td style="font-size: 7px;">OK</td>
+            </tr>
+              <tr>
+               <td style="font-size: 7px;">6</td>
+               <td style="font-size: 7px;;width: 150px;">ERW OD168.3MM <br> 5.4MM Fe410 GP BE</td>
+               <td style="font-size: 7px;">WD15A</td>
+               <td style="font-size: 7px;">0.670</td>
+               <td style="font-size: 7px;">0.80</td>
+               <td style="font-size: 7px;">0.41</td>
+               <td style="font-size: 7px;">0.022</td>
+               <td style="font-size: 7px;">0.007</td>
+               <td style="font-size: 7px;">NA</td>
+               <td style="font-size: 7px;">432</td>
+               <td style="font-size: 7px;">30</td>
+               <td style="font-size: 7px;">OK</td>
+               <td style="font-size: 7px;">NA</td>
+               <td style="font-size: 7px;">NA</td>
+               <td style="font-size: 7px;">NA</td>
+               <td style="font-size: 7px;">NA</td>
+               <td style="font-size: 7px;">NA</td>
+               <td style="font-size: 7px;">OK</td>
+                <td style="font-size: 7px;">NA</td>
+               <td style="font-size: 7px;">NA</td>
+               <td style="font-size: 7px;">OK</td>
+            </tr>
+              <tr>
+               <td style="font-size: 7px;">7</td>
+               <td style="font-size: 7px;;width: 150px;">ERW OD168.3MM <br> 5.4MM Fe410 GP BE</td>
+               <td style="font-size: 7px;">WD15A</td>
+               <td style="font-size: 7px;">0.670</td>
+               <td style="font-size: 7px;">0.80</td>
+               <td style="font-size: 7px;">0.41</td>
+               <td style="font-size: 7px;">0.022</td>
+               <td style="font-size: 7px;">0.007</td>
+               <td style="font-size: 7px;">NA</td>
+               <td style="font-size: 7px;">432</td>
+               <td style="font-size: 7px;">30</td>
+               <td style="font-size: 7px;">OK</td>
+               <td style="font-size: 7px;">NA</td>
+               <td style="font-size: 7px;">NA</td>
+               <td style="font-size: 7px;">NA</td>
+               <td style="font-size: 7px;">NA</td>
+               <td style="font-size: 7px;">NA</td>
+               <td style="font-size: 7px;">OK</td>
+                <td style="font-size: 7px;">NA</td>
+               <td style="font-size: 7px;">NA</td>
+               <td style="font-size: 7px;">OK</td>
+            </tr>
+              <tr>
+               <td style="font-size: 7px;">8</td>
+               <td style="font-size: 7px;;width: 150px;">ERW OD168.3MM <br> 5.4MM Fe410 GP BE</td>
+               <td style="font-size: 7px;">WD15A</td>
+               <td style="font-size: 7px;">0.670</td>
+               <td style="font-size: 7px;">0.80</td>
+               <td style="font-size: 7px;">0.41</td>
+               <td style="font-size: 7px;">0.022</td>
+               <td style="font-size: 7px;">0.007</td>
+               <td style="font-size: 7px;">NA</td>
+               <td style="font-size: 7px;">432</td>
+               <td style="font-size: 7px;">30</td>
+               <td style="font-size: 7px;">OK</td>
+               <td style="font-size: 7px;">NA</td>
+               <td style="font-size: 7px;">NA</td>
+               <td style="font-size: 7px;">NA</td>
+               <td style="font-size: 7px;">NA</td>
+               <td style="font-size: 7px;">NA</td>
+               <td style="font-size: 7px;">OK</td>
+                <td style="font-size: 7px;">NA</td>
+               <td style="font-size: 7px;">NA</td>
+               <td style="font-size: 7px;">OK</td>
+            </tr>
+              <tr>
+               <td style="font-size: 7px;">9</td>
+               <td style="font-size: 7px;;width: 150px;">ERW OD168.3MM <br> 5.4MM Fe410 GP BE</td>
+               <td style="font-size: 7px;">WD15A</td>
+               <td style="font-size: 7px;">0.670</td>
+               <td style="font-size: 7px;">0.80</td>
+               <td style="font-size: 7px;">0.41</td>
+               <td style="font-size: 7px;">0.022</td>
+               <td style="font-size: 7px;">0.007</td>
+               <td style="font-size: 7px;">NA</td>
+               <td style="font-size: 7px;">432</td>
+               <td style="font-size: 7px;">30</td>
+               <td style="font-size: 7px;">OK</td>
+               <td style="font-size: 7px;">NA</td>
+               <td style="font-size: 7px;">NA</td>
+               <td style="font-size: 7px;">NA</td>
+               <td style="font-size: 7px;">NA</td>
+               <td style="font-size: 7px;">NA</td>
+               <td style="font-size: 7px;">OK</td>
+                <td style="font-size: 7px;">NA</td>
+               <td style="font-size: 7px;">NA</td>
+               <td style="font-size: 7px;">OK</td>
+            </tr>
+              <tr>
+               <td style="font-size: 7px;">10</td>
+               <td style="font-size: 7px;;width: 150px;">ERW OD168.3MM <br> 5.4MM Fe410 GP BE</td>
+               <td style="font-size: 7px;">WD15A</td>
+               <td style="font-size: 7px;">0.670</td>
+               <td style="font-size: 7px;">0.80</td>
+               <td style="font-size: 7px;">0.41</td>
+               <td style="font-size: 7px;">0.022</td>
+               <td style="font-size: 7px;">0.007</td>
+               <td style="font-size: 7px;">NA</td>
+               <td style="font-size: 7px;">432</td>
+               <td style="font-size: 7px;">30</td>
+               <td style="font-size: 7px;">OK</td>
+               <td style="font-size: 7px;">NA</td>
+               <td style="font-size: 7px;">NA</td>
+               <td style="font-size: 7px;">NA</td>
+               <td style="font-size: 7px;">NA</td>
+               <td style="font-size: 7px;">NA</td>
+               <td style="font-size: 7px;">OK</td>
+                <td style="font-size: 7px;">NA</td>
+               <td style="font-size: 7px;">NA</td>
+               <td style="font-size: 7px;">OK</td>
+            </tr>
+             
+         </table>
+      
+         <table style="width: 100%; ">
+           <!--  <tr>
+               <td  style="font-size:10px;padding-left: 36px; font-weight: 500;">It is certified that each steel tube is NDT/ hydrostatically tested to test pressure of MPa. Also Material supplied confirms to standard dimensions
+and mass tolerances & Straightness. * And for circular & rectangular hollow section conforms to standard norms on twist, squareness of corner, external
+corner radius & concavity/convexity. </td>
+                
+            </tr>
+            <tr>
+               <td  style="font-size:10px;padding-left: 36px; font-weight: 500;">B/E- An angle of bevelled and root face conform to standard, P/E- Square cut ends, S/S- Pipe threads conform to IS 554 : 1999 & Fitted sockets conform to IS 1239 P-II : 2011, SWS- Pipe
+threads conforming to IS 554 : 1999. Our Products<br> have been manufactured from IS marked HR Coil only.
+ </td>
+            </tr> -->
+             <table style="width: 100%; ">
+            <tr>
+               <td  style="font-size:9px;padding-left: 36px;"><b>It is certified that each steel tube is NDT/ hydrostatically tested to test pressure of MPa. Also Material supplied confirms to standard dimensions
+and mass tolerances & Straightness. *<br>  And for circular & rectangular hollow section conforms to standard norms on twist, squareness of corner, external 
+corner radius & concavity/convexity.</b><br> <span>B/E- An angle of bevelled and root face conform to standard, P/E- Square cut ends, S/S- Pipe threads conform to IS 554 : 1999 & Fitted sockets conform to IS 1239 P-II : 2011, SWS- Pipe <br>
+threads conforming to IS 554 : 1999. Our Products have been manufactured from IS marked HR Coil only</span></td>
+               <th style="font-size: 14px;font-weight: 500;">UTKARSH INDIA LIMITED</th>
+            </tr>
+         </table>
+         </table>
+         <table style="width: 100%; margin-top: 10px;padding-left: 3%;">
+            <td style="font-size: 9px;">Invoice No. <b>J003686/23-24</b><br><br> Vehicle No.<b>WB11E8867</b></td>
+            <th style="font-size: 15px; font-weight: 500;">
+               UTKARSH INDIA LIMITED<br>
+               <p style="font-size: 9px; margin-bottom: 1px;">Regd.Office: Arrjaw Square, 4th Floor, 95A , Elliot Road, Kolkata-700 016</p>
+               <br>
+               <p style="font-size: 9px;margin-top: -2%;">Tel.: +91 33 22646666, E-mail: info@utkarshindia.in, Website: www.utkarshindia.com</p>
+               <br>
+               <p style="font-size: 9px;margin-top: -4%; margin-bottom: 4%;">Factory NH 6, Vill-Jangalpur, P O-Andul Mouri, Howrah (WB), India, Tel.: +91 33 2669 3856</p>
+            </th>
+            <td style="padding-top: 4%;font-weight: 500;font-size: 9px; ">DGM-Quality Assurance</td>
+         </table>
+         <table style="width: 100%;margin-top: -10%;">
+            <p style="font-size: 9px;margin-left: 3%;font-weight: 500;">PLEASE VERIFY THE MARK&nbsp; &nbsp;<img src="{{ asset('public/printasset/bansal.jpg') }}" style="width: 80px; margin-top: 2%;"> &nbsp; <img src="{{ asset('public/printasset/utkarsh-logo.jpg') }}" style="width: 80px; margin-top: 2%;">&nbsp; &nbsp;AND&nbsp; &nbsp; <img src="{{asset('public')}}/printasset/images/isi.png" style="width: 30px;margin-top: 2%; ">&nbsp; &nbsp;EMBOSSED ON OUR PIPES AT EVERY METER AND OUR MATERIALS ARE GURANTEED FOR 12 MONTHS FROM DATE</p>
+         </table>
+        <!--  <table style="margin-top: -1%; width: 100%;">
+            <tr>
+               <td style="width: 100%;height: 25px;background-color: #6cbc4f;"></td>
+            </tr>
+         </table> -->
+         <!-- ==========================================code here================================== -->
+      </div>
+   </body>
+</html>
