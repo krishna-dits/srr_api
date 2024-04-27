@@ -30,6 +30,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 // LOGIN USER
 Route::post('/login', [AuthController::class, 'loginUser']);
 
+
 //NOTES
 Route::get('getNotes', [NoteController::class, 'get_notes']);
 Route::post('saveNotes', [NoteController::class, 'save_notes']);
@@ -57,8 +58,11 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
     Route::get('/user-data', [AuthController::class, 'user_data']);
 
+    // TASK MANAGEMENT
     Route::prefix('task')->group(function () {
-        Route::match(['get', 'post'], 'create', [TaskController::class, 'create']);
+        Route::post('create', [TaskController::class, 'create']);
+        Route::post('update/{id}', [TaskController::class, 'update']);
+        Route::post('get', [TaskController::class, 'get']);
     });
 });
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\TaskResource;
 use App\Models\Task;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -126,14 +127,14 @@ class TaskController extends Controller
                 'document'       => $filename,
             ];
 
-            $task = Task::create($data);
+            $task->update($data);
 
             if ($task) {
                 return response()->json([
                     'status'    => true,
                     'message'   => 'Task updated successfully.',
                     'errors'    => null,
-                ], 201);
+                ], 200);
             } else {
                 return response()->json([
                     'status'    => false,
@@ -141,6 +142,48 @@ class TaskController extends Controller
                     'errors'    => null,
                 ], 400);
             }
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status'    => false,
+                'message'   => 'Internal server errors.',
+                'errors'    => $th,
+            ], 500);
+        }
+    }
+
+
+    public function get(Request $request)
+    {
+        try {
+            if ($request->category_id && $request->status && $request->priority) {
+
+                $tasks = TaskResource::collection(Task::where('category_id', $request->category_id)->where('status', $request->status)->where('priority', $request->priority)->get());
+            } elseif ($request->category_id && $request->priority) {
+
+                $tasks = TaskResource::collection(Task::where('category_id', $request->category_id)->where('priority', $request->priority)->get());
+            } elseif ($request->status && $request->priority) {
+
+                $tasks = TaskResource::collection(Task::where('priority', $request->priority)->where('status', $request->status)->get());
+            } elseif ($request->category_id && $request->status) {
+
+                $tasks = TaskResource::collection(Task::where('category_id', $request->category_id)->where('status', $request->status)->get());
+            } elseif ($request->category_id) {
+
+                $tasks = TaskResource::collection(Task::where('category_id', $request->category_id)->get());
+            } elseif ($request->status) {
+
+                $tasks = TaskResource::collection(Task::where('status', $request->status)->get());
+            } elseif ($request->priority) {
+
+                $tasks = TaskResource::collection(Task::where('priority', $request->priority)->get());
+            } else {
+                $tasks = TaskResource::collection(Task::get());
+            }
+
+            return response()->json([
+                'status'    => true,
+                'task'      => $tasks,
+            ], 200);
         } catch (\Throwable $th) {
             return response()->json([
                 'status'    => false,
