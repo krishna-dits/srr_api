@@ -7,6 +7,7 @@ use App\Http\Controllers\Master\ItemCategoryController;
 use GuzzleHttp\Middleware;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\API\NoteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,6 +28,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 // LOGIN USER
 Route::post('/login', [AuthController::class, 'loginUser']);
+
+Route::get('/test', [NoteController::class, 'get_notes']);
 
 
 // LOGOUT USER
@@ -49,7 +52,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
 // });
 
-// // ITEM CATEGORY ADD ROUTES 
+// // ITEM CATEGORY ADD ROUTES
 // Route::group(['middleware' => ['auth:sanctum','permission:add item categories']], function () {
 
 //     Route::post('/itemCategoryAddAction',[ItemCategoryApi::class, 'itemCategoryAddAction'])->name('itemCategoryAddAction');
