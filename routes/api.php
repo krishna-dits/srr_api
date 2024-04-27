@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\NoteController;
 use App\Http\Controllers\API\LeaveTypeController;
 use App\Http\Controllers\API\LeaveAllocationController;
+use App\Http\Controllers\API\ApplyLeaveController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -48,6 +50,11 @@ Route::post('saveLeaveAllocation', [LeaveAllocationController::class, 'save_leav
 Route::post('updateLeaveAllocation', [LeaveAllocationController::class, 'update_leave_allocation']);
 Route::get('deleteLeaveAllocation/{id}', [LeaveAllocationController::class, 'delete_leave_allocation']);
 
+//APPLY LEAVE
+Route::get('getAppliedLeaves', [ApplyLeaveController::class, 'get_leaves']);
+Route::post('applyLeaves', [ApplyLeaveController::class, 'save_leaves']);
+Route::post('updateLeaves', [ApplyLeaveController::class, 'update_leaves']);
+Route::get('deleteLeaves/{id}', [ApplyLeaveController::class, 'delete_leaves']);
 
 
 // LOGOUT USER
