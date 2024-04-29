@@ -14,49 +14,21 @@ class AuthController extends Controller
     public function loginUser(Request $request)
     {
         try {
-            $validate =  Validator::make($request->all(), [
-                'email'     => 'required|email',
-                'password'  => 'required|',
-            ]);
-
-            if ($validate->fails()) {
-                $errors = $validate->errors();
-                return response()->json([
-                    'status' => false,
-                    'message' => 'Validation error',
-                    'errors' => $errors
-                ], 400);
-            }
-
             $data = User::where('email', $request->email)->first();
 
             if (empty($data)) {
-                return response()->json([
-                    'status' => false,
-                    'message' => 'Credential not match.',
-                    'errors' => ''
-                ], 400);
+                return response()->json(['success' => 0, 'message' => 'Credential not match.'], 400);
             }
 
             if (Auth::attempt($request->except('_token'))) {
                 return response()->json([
-                    'status' => true,
-                    'userInfo' => ['name' => $data->name, 'email' => $data->email],
-                    'token' => $data->createToken("API TOKEN")->plainTextToken
+                    'success' => 1, 'userInfo' => ['id' => $data->id, 'name' => $data->name, 'email' => $data->email, 'role' => $data->role_as], 'token' => $data->createToken("API TOKEN")->plainTextToken
                 ], 200);
             } else {
-                return response()->json([
-                    'status' => false,
-                    'message' => 'Credential not match.',
-                    'errors' => ''
-                ], 400);
+                return response()->json(['success' => 0, 'message' => 'Credential not match.'], 400);
             }
         } catch (\Exception $th) {
-            return response()->json([
-                'status' => false,
-                'message' => 'Internal server error.',
-                'errors' => $th->getMessage(),
-            ], 500);
+            return response()->json(['success' => 0, 'message' => 'Internal server errors.'], 500);
         }
     }
 
@@ -65,29 +37,47 @@ class AuthController extends Controller
     {
         $user = User::find(Auth::user()->id);
         $user->tokens()->delete();
-        return response()->json([
-            'status' => true,
-            'message' => 'User Logout',
-            'errors' => ''
-        ], 200);
+        return response()->json(['success' => 1, 'message' => 'Logout successful.'], 200);
     }
 
 
     public function user_data()
     {
+        $user = User::where('id', Auth::id())->first();
+        return response()->json(['success' => 1, 'user' => $user], 200);
+    }
+
+
+    public function update_user(Request $request)
+    {
         try {
-            $user = User::where('id', Auth::id())->first();
-            return response()->json([
-                'status' => true,
-                'message' => 'User Logout',
-                'data' => $user
-            ], 200);
-        } catch (\Exception $th) {
-            return response()->json([
-                'status' => false,
-                'message' => 'Internal server error.',
-                'errors' => $th->getMessage(),
-            ], 500);
+
+            $user = User::where('id', $request->id)->first();
+
+            if ($request->hasfile('profile_image')) {
+                $file = $request->file('profile_image');
+                $filename = rand() . '.' . $file->getClientOriginalExtension();
+                $file->move("public/profile_picture/", $filename);
+            } else {
+                $filename = $user->profile_image;
+            }
+
+            $user->update([
+                'name'              => $request->name,
+                'email'             => $request->email,
+                'phone_no'          => $request->phone_no,
+                'profile_image'     => $filename,
+                'designation'       => $request->designation,
+                'dob'               => $request->dob,
+                'gender'            => $request->gender,
+                'date_of_joining'   => $request->date_of_joining,
+                'guardian_name'     => $request->guardian_name,
+                'marital_status'    => $request->marital_status,
+            ]);
+
+            return response()->json(['success' => 1, 'message' => 'User Updated Sucessfully'], 200);
+        } catch (\Throwable $th) {
+            return response()->json(['success' => 0, 'message' => 'Internal server errors.'], 500);
         }
     }
 }

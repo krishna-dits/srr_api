@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Auth;
 
 class TaskController extends Controller
 {
-    public function create(Request $request)
+    public function create_task(Request $request)
     {
         try {
             $filename = null;
@@ -48,7 +48,7 @@ class TaskController extends Controller
     }
 
 
-    public function update(Request $request, $id)
+    public function update_task(Request $request, $id)
     {
         try {
             $task = Task::where('id', $id)->withTrashed()->first();
@@ -118,5 +118,19 @@ class TaskController extends Controller
         } catch (\Throwable $th) {
             return response()->json(['success' => 0, 'message' => 'Internal server errors.'], 500);
         }
+    }
+
+
+    public function task_status_update($id, $status)
+    {
+        $task = Task::whereId($id)->first();
+
+        if (empty($task)) {
+            return response()->json(['success' => 0, 'message' => 'Task not found.'], 400);
+        }
+
+        $task->update(['status' => $status]);
+
+        return response()->json(['success' => 1, 'message' => 'Status updated successfully.'], 200);
     }
 }

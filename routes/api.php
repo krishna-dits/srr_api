@@ -11,6 +11,7 @@ use App\Http\Controllers\API\NoteController;
 use App\Http\Controllers\API\LeaveTypeController;
 use App\Http\Controllers\API\LeaveAllocationController;
 use App\Http\Controllers\API\ApplyLeaveController;
+use App\Http\Controllers\API\TaskCategoryCon;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,21 +31,23 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 // AUTH RELATED ROUTE
 
 // LOGIN USER
-Route::post('/login', [AuthController::class, 'loginUser']);
+Route::post('login', [AuthController::class, 'loginUser']);
 
 // LOGOUT USER
 Route::group(['middleware' => ['auth:sanctum']], function () {
 
-    Route::post('/logout', [AuthController::class, 'logout']);
-
-    Route::get('/user-data', [AuthController::class, 'user_data']);
+    Route::post('logout', [AuthController::class, 'logout']);
+    Route::get('user-data', [AuthController::class, 'user_data']);
+    Route::post('update_user', [AuthController::class, 'update_user']);
 
     // TASK MANAGEMENT
-    Route::prefix('task')->group(function () {
-        Route::post('create', [TaskController::class, 'create']);
-        Route::post('update/{id}', [TaskController::class, 'update']);
-        Route::post('get', [TaskController::class, 'get_task']);
-    });
+    Route::post('create_task', [TaskController::class, 'create_task']);
+    Route::post('update_task/{id}', [TaskController::class, 'update_task']);
+    Route::post('get_task', [TaskController::class, 'get_task']);
+    Route::get('task_status_update/{id}/{status}', [TaskController::class, 'task_status_update']);
+
+    Route::get('get_task_category', [TaskCategoryCon::class, 'get_task_category']);
+    Route::post('create_task_category', [TaskCategoryCon::class, 'create_task_category']);
 
 
     //NOTES
