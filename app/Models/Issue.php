@@ -5,9 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class TaskCategory extends Model
+class Issue extends Model
 {
     use HasFactory;
-
-    protected $fillable = ['name', 'created_at', 'updated_at'];
 }

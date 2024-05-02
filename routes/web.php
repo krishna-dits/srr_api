@@ -17,6 +17,8 @@ use App\Http\Controllers\CoilMasterController;
 use App\Http\Controllers\TcMasterController;
 use App\Http\Controllers\ReportsController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\Task\CategoryController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -183,6 +185,10 @@ Route::group(['middleware' => ['permission:Set Up']], function () {
             Route::post('Customer-update', [CustomerController::class, 'Customer_update'])->name('Customer-update');
         });
     });
+
+    Route::match(['get', 'post'], 'task-category/{id?}', [CategoryController::class, 'index'])->middleware([])->name('category');
+
+    Route::get('delete-category/{id?}', [CustomerController::class, 'delete_category'])->name('delete_category');
 });
 
 

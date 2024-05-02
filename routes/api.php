@@ -24,6 +24,12 @@ use App\Http\Controllers\API\TaskCategoryCon;
 |
 */
 
+
+// Route::get('test', function () {
+//     return "API working successfully.";
+// });
+
+
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
@@ -44,10 +50,12 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('create_task', [TaskController::class, 'create_task']);
     Route::post('update_task/{id}', [TaskController::class, 'update_task']);
     Route::post('get_task', [TaskController::class, 'get_task']);
+    Route::post('get_task_for_user', [TaskController::class, 'get_task_for_user']);
     Route::get('task_status_update/{id}/{status}', [TaskController::class, 'task_status_update']);
 
     Route::get('get_task_category', [TaskCategoryCon::class, 'get_task_category']);
     Route::post('create_task_category', [TaskCategoryCon::class, 'create_task_category']);
+    Route::post('update_task_category/{id}', [TaskCategoryCon::class, 'update_task_category']);
 
 
     //NOTES

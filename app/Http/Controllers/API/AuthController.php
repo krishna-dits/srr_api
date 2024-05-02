@@ -62,20 +62,17 @@ class AuthController extends Controller
                 $filename = $user->profile_image;
             }
 
-            $user->update([
-                'name'              => $request->name,
-                'email'             => $request->email,
-                'phone_no'          => $request->phone_no,
-                'profile_image'     => $filename,
-                'designation'       => $request->designation,
-                'dob'               => $request->dob,
-                'gender'            => $request->gender,
-                'date_of_joining'   => $request->date_of_joining,
-                'guardian_name'     => $request->guardian_name,
-                'marital_status'    => $request->marital_status,
-            ]);
+            $user->name = $request->name;
+            $user->email = $request->email;
+            $user->phone_no = $request->phone_no;
+            $user->profile_image = $filename;
+            $user->dob = $request->dob;
+            $user->gender = $request->gender;
+            $user->guardian_name = $request->guardian_name;
+            $user->marital_status = $request->marital_status;
+            $user->save();
 
-            return response()->json(['success' => 1, 'message' => 'User Updated Sucessfully'], 200);
+            return response()->json(['success' => 1, 'message' => 'User Updated Sucessfully', 'data' => $user], 200);
         } catch (\Throwable $th) {
             return response()->json(['success' => 0, 'message' => 'Internal server errors.'], 500);
         }
