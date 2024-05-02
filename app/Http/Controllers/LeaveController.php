@@ -42,10 +42,15 @@ class LeaveController extends Controller
         return response()->json(['success'=>1,'data'=>$leave], 200,[],JSON_NUMERIC_CHECK);
     }
 
-    public function update_status($id){
+    public function update_status($id,$status){
         $leave = Leave::find($id);
-        $leave->approved = $leave->approved==0?1:0;
+        $leave->approved = $status;
         $leave->update();
+        return response()->json(['success'=>1,'data'=>$leave], 200,[],JSON_NUMERIC_CHECK);
+    }
+
+    public function user_wise_leave(Request $request){
+        $leave = Leave::whereUserId($request->user()->id)->get();
         return response()->json(['success'=>1,'data'=>$leave], 200,[],JSON_NUMERIC_CHECK);
     }
 

@@ -35,6 +35,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 // AUTH RELATED ROUTE
 
+
+
 // LOGIN USER
 Route::post('login', [AuthController::class, 'loginUser']);
 
@@ -68,7 +70,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('saveLeaves', [LeaveController::class, 'save_leaves']);
     Route::post('updateLeaves', [LeaveController::class, 'update_leave']);
     Route::get('deleteLeaves/{id}', [LeaveController::class, 'delete_leave']);
-    Route::get('updateStatus/{id}', [LeaveController::class, 'update_status']);
+    Route::get('updateStatus/{id}/{status}', [LeaveController::class, 'update_status']);
+    Route::get('userWiseLeave', [LeaveController::class, 'user_wise_leave']);
 
 //    //LEAVE TYPE
 //    Route::get('getLeaveType', [LeaveTypeController::class, 'get_leave_type']);
