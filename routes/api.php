@@ -8,10 +8,8 @@ use GuzzleHttp\Middleware;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\NoteController;
-use App\Http\Controllers\API\LeaveTypeController;
-use App\Http\Controllers\API\LeaveAllocationController;
-use App\Http\Controllers\API\ApplyLeaveController;
 use App\Http\Controllers\API\TaskCategoryCon;
+use App\Http\Controllers\LeaveController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,6 +26,7 @@ use App\Http\Controllers\API\TaskCategoryCon;
 // Route::get('test', function () {
 //     return "API working successfully.";
 // });
+
 
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
@@ -64,24 +63,31 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('updateNotes', [NoteController::class, 'update_notes']);
     Route::get('deleteNotes/{id}', [NoteController::class, 'delete_notes']);
 
-    //LEAVE TYPE
-    Route::get('getLeaveType', [LeaveTypeController::class, 'get_leave_type']);
-    Route::post('saveLeaveType', [LeaveTypeController::class, 'save_leave_type']);
-    Route::post('updateLeaveType', [LeaveTypeController::class, 'update_leave_type']);
-    Route::get('deleteLeaveType/{id}', [LeaveTypeController::class, 'delete_leave_type']);
+    //leaves
+    Route::get('getLeaves', [LeaveController::class, 'get_leaves']);
+    Route::post('saveLeaves', [LeaveController::class, 'save_leaves']);
+    Route::post('updateLeaves', [LeaveController::class, 'update_leave']);
+    Route::get('deleteLeaves/{id}', [LeaveController::class, 'delete_leave']);
+    Route::get('updateStatus/{id}', [LeaveController::class, 'update_status']);
 
-    //LEAVE ALLOCATIONS
-    Route::get('getLeaveAllocation', [LeaveAllocationController::class, 'get_leave_allocation']);
-    Route::post('saveLeaveAllocation', [LeaveAllocationController::class, 'save_leave_allocation']);
-    Route::post('updateLeaveAllocation', [LeaveAllocationController::class, 'update_leave_allocation']);
-    Route::get('deleteLeaveAllocation/{id}', [LeaveAllocationController::class, 'delete_leave_allocation']);
-
-    //APPLY LEAVE
-    Route::get('getAppliedLeaves', [ApplyLeaveController::class, 'get_leaves']);
-    Route::get('getAppliedLeavesByUser', [ApplyLeaveController::class, 'get_leave_by_user']);
-    Route::post('applyLeaves', [ApplyLeaveController::class, 'save_leaves']);
-    Route::post('updateLeaves', [ApplyLeaveController::class, 'update_leaves']);
-    Route::get('deleteLeaves/{id}', [ApplyLeaveController::class, 'delete_leaves']);
+//    //LEAVE TYPE
+//    Route::get('getLeaveType', [LeaveTypeController::class, 'get_leave_type']);
+//    Route::post('saveLeaveType', [LeaveTypeController::class, 'save_leave_type']);
+//    Route::post('updateLeaveType', [LeaveTypeController::class, 'update_leave_type']);
+//    Route::get('deleteLeaveType/{id}', [LeaveTypeController::class, 'delete_leave_type']);
+//
+//    //LEAVE ALLOCATIONS
+//    Route::get('getLeaveAllocation', [LeaveAllocationController::class, 'get_leave_allocation']);
+//    Route::post('saveLeaveAllocation', [LeaveAllocationController::class, 'save_leave_allocation']);
+//    Route::post('updateLeaveAllocation', [LeaveAllocationController::class, 'update_leave_allocation']);
+//    Route::get('deleteLeaveAllocation/{id}', [LeaveAllocationController::class, 'delete_leave_allocation']);
+//
+//    //APPLY LEAVE
+//    Route::get('getAppliedLeaves', [ApplyLeaveController::class, 'get_leaves']);
+//    Route::get('getAppliedLeavesByUser', [ApplyLeaveController::class, 'get_leave_by_user']);
+//    Route::post('applyLeaves', [ApplyLeaveController::class, 'save_leaves']);
+//    Route::post('updateLeaves', [ApplyLeaveController::class, 'update_leaves']);
+//    Route::get('deleteLeaves/{id}', [ApplyLeaveController::class, 'delete_leaves']);
 });
 
 
