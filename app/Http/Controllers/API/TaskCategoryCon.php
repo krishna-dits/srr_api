@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Models\Issue;
 use App\Models\TaskCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TaskCategoryCon extends Controller
 {
@@ -33,5 +35,40 @@ class TaskCategoryCon extends Controller
         $taskCateroty->update();
 
         return response()->json(['success' => 1, 'message' => 'Categoty updated successfully.'], 200);
+    }
+
+
+    public function create_task_issue(Request $request)
+    {
+        $issue = new Issue();
+
+        $issue->user_id = $request->user_id;
+        $issue->issue_note = $request->issue_note;
+        $issue->task_id = $request->task_id;
+        $issue->status = 0;
+        $issue->save();
+
+        return response()->json(['success' => 1, 'message' => 'Issue created successfully.'], 200);
+    }
+
+    public function resolve_task_issue($id)
+    {
+        $issue = Issue::whereId($id)->first();
+        $issue->status = 1;
+        $issue->save();
+
+        return response()->json(['success' => 1, 'message' => 'Issue resolved successfully.'], 200);
+    }
+
+    public function get_issue_for_admin()
+    {
+        $issues = Issue::with('getUser', 'getTask')->get();
+        return response()->json(['success' => 1, 'data' => $issues], 200);
+    }
+
+    public function get_issue_for_user($user_id)
+    {
+        $issues = Issue::whereId($user_id)->with('getTask')->get();
+        return response()->json(['success' => 1, 'data' => $issues], 200);
     }
 }

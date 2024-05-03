@@ -65,7 +65,6 @@ class TaskController extends Controller
             $task->start_date     = $request->start_date;
             $task->end_date       = $request->end_date;
             $task->user_ids       = json_encode($request->user_ids);
-            $task->assign_user_id = Auth::id();
             $task->priority       = $request->priority;
             $task->category_id    = $request->category_id;
             $task->project_id     = $request->project_id;
@@ -166,5 +165,11 @@ class TaskController extends Controller
         } catch (\Throwable $th) {
             return response()->json(['success' => 0, 'message' => 'Internal server errors.'], 500);
         }
+    }
+
+    public function delete_task(Request $request)
+    {
+        Task::whereId($request->id)->delete();
+        return response()->json(['success' => 1, 'message' => 'Task deleted successfully.'], 200);
     }
 }

@@ -5,12 +5,12 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Note;
-
+use Illuminate\Support\Facades\Auth;
 
 class NoteController extends Controller
 {
     public function get_notes(){
-        return Note::get();
+        return Note::whereId(Auth::id())->get();
     }
 
     public function save_notes(Request $request){
