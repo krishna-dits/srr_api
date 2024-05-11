@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\TaskResource;
+use App\Models\Issue;
 use App\Models\Task;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -26,7 +27,7 @@ class TaskController extends Controller
                 'description'    => $request->description,
                 'start_date'     => $request->start_date,
                 'end_date'       => $request->end_date,
-                'user_ids'       => json_encode($request->user_ids),
+                'user_ids'       => $request->user_ids,
                 'assign_user_id' => Auth::id(),
                 'priority'       => $request->priority,
                 'category_id'    => $request->category_id,
@@ -89,7 +90,7 @@ class TaskController extends Controller
         try {
             if ($request->category_id && $request->status && $request->priority) {
 
-                $tasks = Task::whereCategoryId($request->category_id)->whereStatus($request->status)->wherePriority($request->priority)->get();
+                $tasks = Task::whereCategoryId($request->category_id)->whereStatus($request->status)->wherePriority($request->priority)->with('getUser')->get();
             } elseif ($request->category_id && $request->priority) {
 
                 $tasks = Task::whereCategoryId($request->category_id)->wherePriority($request->priority)->get();
@@ -116,6 +117,14 @@ class TaskController extends Controller
         } catch (\Throwable $th) {
             return response()->json(['success' => 0, 'message' => 'Internal server errors.'], 500);
         }
+    }
+
+
+    public function get_task_by_id(Request $request)
+    {
+        $data = Task::whereId($request->task_id)->first();
+        $data = new TaskResource($data);
+        return response()->json(['success' => 1, 'task' => $data], 200);
     }
 
 
@@ -169,7 +178,19 @@ class TaskController extends Controller
 
     public function delete_task(Request $request)
     {
-        Task::whereId($request->id)->delete();
+        Issue::whereTaskId($request->id)->delete();
+        Task::whereId($request->id)->forceDelete();
         return response()->json(['success' => 1, 'message' => 'Task deleted successfully.'], 200);
+    }
+
+    public function task_arcrived(Request $request)
+    {
+        if ($request->archive == '0') {
+            Task::whereId($request->id)->restore();
+            return response()->json(['success' => 1, 'message' => 'Task unarchived successfully.'], 200);
+        } else {
+            Task::whereId($request->id)->delete();
+            return response()->json(['success' => 1, 'message' => 'Task archived successfully.'], 200);
+        }
     }
 }

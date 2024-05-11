@@ -62,13 +62,13 @@ class TaskCategoryCon extends Controller
 
     public function get_issue_for_admin()
     {
-        $issues = Issue::with('getUser', 'getTask')->get();
+        $issues = Issue::with('getUser', 'getTask')->whereStatus('0')->get();
         return response()->json(['success' => 1, 'data' => $issues], 200);
     }
 
     public function get_issue_for_user($user_id)
     {
-        $issues = Issue::whereId($user_id)->with('getTask')->get();
+        $issues = Issue::whereUserId($user_id)->whereStatus('0')->with('getTask')->get();
         return response()->json(['success' => 1, 'data' => $issues], 200);
     }
 }

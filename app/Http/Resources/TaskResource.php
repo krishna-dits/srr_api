@@ -14,6 +14,8 @@ class TaskResource extends JsonResource
      */
     public function toArray($request)
     {
+        // $users = json_decode($this->user_ids, true);
+
         return [
             'id'            => $this->id,
             'title'         => $this->title,

@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
@@ -44,6 +47,7 @@ class AuthController extends Controller
     public function user_data()
     {
         $user = User::where('id', Auth::id())->first();
+        $user = new UserResource($user);
         return response()->json(['success' => 1, 'user' => $user], 200);
     }
 
@@ -76,5 +80,26 @@ class AuthController extends Controller
         } catch (\Throwable $th) {
             return response()->json(['success' => 0, 'message' => 'Internal server errors.'], 500);
         }
+    }
+
+
+    public function forget_password()
+    {
+        // $otp = mt_rand(10000000, 99999999);
+        // $user = User::whereId(Auth::id())->first();
+        // $user-> = Hash::make($otp);
+        // $user->update();
+
+        // $email_id = $user->email;
+        // Mail::send('emails.forget_pass', [
+        //     'name' => $user->name,
+        //     'password' => $otp
+        // ], function ($message) use ($email_id) {
+        //     $message->from('noreply.srrmail@gmail.com');
+        //     $message->to($email_id);
+        //     $message->subject("New password generate.");
+        // });
+
+        return response()->json(['success' => 1, 'message' => 'Password reset link send to the email.'], 200);
     }
 }

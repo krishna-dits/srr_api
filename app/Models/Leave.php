@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Leave extends Model
 {
     use HasFactory;
+
+    public function getUser()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id')->select('id', 'name',);
+    }
 }

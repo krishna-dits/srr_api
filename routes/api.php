@@ -47,13 +47,16 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('logout', [AuthController::class, 'logout']);
     Route::get('user-data', [AuthController::class, 'user_data']);
     Route::post('update_user', [AuthController::class, 'update_user']);
+    Route::get('forget_password', [AuthController::class, 'forget_password']);
 
     // TASK MANAGEMENT
     Route::post('create_task', [TaskController::class, 'create_task']);
     Route::post('update_task/{id}', [TaskController::class, 'update_task']);
     Route::post('get_task', [TaskController::class, 'get_task']);
+    Route::post('get_task_by_id', [TaskController::class, 'get_task_by_id']);
     Route::post('get_task_for_user', [TaskController::class, 'get_task_for_user']);
     Route::get('task_status_update/{id}/{status}', [TaskController::class, 'task_status_update']);
+    Route::post('task_arcrived', [TaskController::class, 'task_arcrived']);
 
     Route::get('get_task_category', [TaskCategoryCon::class, 'get_task_category']);
     Route::post('create_task_category', [TaskCategoryCon::class, 'create_task_category']);
@@ -69,6 +72,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
     //NOTES
     Route::get('getNotes', [NoteController::class, 'get_notes']);
+    Route::get('getNotesById/{id}', [NoteController::class, 'getNotesById']);
     Route::post('saveNotes', [NoteController::class, 'save_notes']);
     Route::post('updateNotes', [NoteController::class, 'update_notes']);
     Route::get('deleteNotes/{id}', [NoteController::class, 'delete_notes']);
@@ -80,6 +84,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('deleteLeaves/{id}', [LeaveController::class, 'delete_leave']);
     Route::get('updateStatus/{id}/{status}', [LeaveController::class, 'update_status']);
     Route::get('userWiseLeave', [LeaveController::class, 'user_wise_leave']);
+    Route::get('user_wise_leave_with_id/{id}', [LeaveController::class, 'user_wise_leave_with_id']);
 
 
     // User data
