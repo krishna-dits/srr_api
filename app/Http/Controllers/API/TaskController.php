@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\TaskResource;
 use App\Models\Issue;
 use App\Models\Task;
+use App\Models\TaskReview;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -65,7 +67,7 @@ class TaskController extends Controller
             $task->description    = $request->description;
             $task->start_date     = $request->start_date;
             $task->end_date       = $request->end_date;
-            $task->user_ids       = json_encode($request->user_ids);
+            $task->user_ids       = $request->user_ids;
             $task->priority       = $request->priority;
             $task->category_id    = $request->category_id;
             $task->project_id     = $request->project_id;
@@ -122,7 +124,7 @@ class TaskController extends Controller
 
     public function get_task_by_id(Request $request)
     {
-        $data = Task::whereId($request->task_id)->first();
+        $data = Task::whereId($request->task_id)->withTrashed()->first();
         $data = new TaskResource($data);
         return response()->json(['success' => 1, 'task' => $data], 200);
     }
@@ -147,25 +149,25 @@ class TaskController extends Controller
         try {
             if ($request->category_id && $request->status && $request->priority) {
 
-                $tasks = Task::whereCategoryId($request->category_id)->whereStatus($request->status)->wherePriority($request->priority)->get();
+                $tasks = Task::whereJsonContains('user_ids', $request->user_id)->whereCategoryId($request->category_id)->whereStatus($request->status)->wherePriority($request->priority)->get();
             } elseif ($request->category_id && $request->priority) {
 
-                $tasks = Task::whereCategoryId($request->category_id)->wherePriority($request->priority)->get();
+                $tasks = Task::whereJsonContains('user_ids', $request->user_id)->whereCategoryId($request->category_id)->wherePriority($request->priority)->get();
             } elseif ($request->status && $request->priority) {
 
-                $tasks = Task::wherePriority($request->priority)->whereStatus($request->status)->get();
+                $tasks = Task::whereJsonContains('user_ids', $request->user_id)->wherePriority($request->priority)->whereStatus($request->status)->get();
             } elseif ($request->category_id && $request->status) {
 
-                $tasks = Task::whereCategoryId($request->category_id)->whereStatus($request->status)->get();
+                $tasks = Task::whereJsonContains('user_ids', $request->user_id)->whereCategoryId($request->category_id)->whereStatus($request->status)->get();
             } elseif ($request->category_id) {
 
-                $tasks = Task::whereCategoryId($request->category_id)->get();
+                $tasks = Task::whereJsonContains('user_ids', $request->user_id)->whereCategoryId($request->category_id)->get();
             } elseif ($request->status) {
 
-                $tasks = Task::whereStatus($request->status)->get();
+                $tasks = Task::whereJsonContains('user_ids', $request->user_id)->whereStatus($request->status)->get();
             } elseif ($request->priority) {
 
-                $tasks = Task::wherePriority($request->priority)->get();
+                $tasks = Task::whereJsonContains('user_ids', $request->user_id)->wherePriority($request->priority)->get();
             } else {
                 $tasks = Task::whereJsonContains('user_ids', $request->user_id)->get();
             }
@@ -179,6 +181,7 @@ class TaskController extends Controller
     public function delete_task(Request $request)
     {
         Issue::whereTaskId($request->id)->delete();
+        TaskReview::whereTaskId($request->id)->delete();
         Task::whereId($request->id)->forceDelete();
         return response()->json(['success' => 1, 'message' => 'Task deleted successfully.'], 200);
     }
@@ -200,8 +203,15 @@ class TaskController extends Controller
         return response()->json(['success' => 1, 'task' => TaskResource::collection($tasks)], 200);
     }
 
-    public function task_review(Request $request)
+    public function get_today_task_for_user(Request $request)
     {
-        
+        $tasks = Task::whereJsonContains('user_ids', $request->user_id)->whereDate('start_date', Carbon::today())->get();
+        return response()->json(['success' => 1, 'task' => TaskResource::collection($tasks)], 200);
+    }
+
+    public function get_today_task_for_admin(Request $request)
+    {
+        $tasks = Task::whereDate('start_date', Carbon::today())->get();
+        return response()->json(['success' => 1, 'task' => TaskResource::collection($tasks)], 200);
     }
 }

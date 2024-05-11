@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\NoteController;
 use App\Http\Controllers\API\TaskCategoryCon;
+use App\Http\Controllers\API\TaskReviewController;
 use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\LeaveController;
 
@@ -53,6 +54,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('create_task', [TaskController::class, 'create_task']);
     Route::post('update_task/{id}', [TaskController::class, 'update_task']);
     Route::post('get_task', [TaskController::class, 'get_task']);
+    Route::post('get_today_task_for_user', [TaskController::class, 'get_today_task_for_user']);
+    Route::post('get_today_task_for_admin', [TaskController::class, 'get_today_task_for_admin']);
     Route::post('get_task_by_id', [TaskController::class, 'get_task_by_id']);
     Route::post('get_task_for_user', [TaskController::class, 'get_task_for_user']);
     Route::post('get_archive_task_for_user', [TaskController::class, 'get_archive_task_for_user']);
@@ -64,12 +67,16 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('create_task_category', [TaskCategoryCon::class, 'create_task_category']);
     Route::post('update_task_category/{id}', [TaskCategoryCon::class, 'update_task_category']);
 
+
     Route::post('create_task_issue', [TaskCategoryCon::class, 'create_task_issue']);
     Route::get('resolve_task_issue/{id}', [TaskCategoryCon::class, 'resolve_task_issue']);
     Route::get('get_issue_for_admin', [TaskCategoryCon::class, 'get_issue_for_admin']);
     Route::get('get_issue_for_user/{user_id}', [TaskCategoryCon::class, 'get_issue_for_user']);
     Route::post('delete_task', [TaskController::class, 'delete_task']);
 
+
+    Route::post('create_task_review', [TaskReviewController::class, 'create_review']);
+    Route::post('get_task_review', [TaskReviewController::class, 'get_task_review']);
 
 
     //NOTES
