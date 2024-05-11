@@ -68,4 +68,17 @@ class LeaveController extends Controller
         $leave = Leave::whereId($id)->whereUserId(Auth::id())->get();
         return response()->json(['success' => 1, 'data' => $leave], 200, [], JSON_NUMERIC_CHECK);
     }
+
+    public function get_leave_report($user_id)
+    {
+        // $totalLeave = Leave::whereUserId($user_id)->groupby('')->sum('total_days');
+
+        $totalLeave = Leave::whereUserId($user_id)->selectRaw('YEAR(from_date) as year, MONTH(from_date) as month, SUM(total_days) as total_days')
+            ->groupBy('year', 'month')
+            ->orderBy('year', 'asc')
+            ->orderBy('month', 'asc')
+            ->get();
+
+        return response()->json(['success' => 1, 'data' => $totalLeave], 200, [], JSON_NUMERIC_CHECK);
+    }
 }

@@ -55,8 +55,10 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('get_task', [TaskController::class, 'get_task']);
     Route::post('get_task_by_id', [TaskController::class, 'get_task_by_id']);
     Route::post('get_task_for_user', [TaskController::class, 'get_task_for_user']);
+    Route::post('get_archive_task_for_user', [TaskController::class, 'get_archive_task_for_user']);
     Route::get('task_status_update/{id}/{status}', [TaskController::class, 'task_status_update']);
     Route::post('task_arcrived', [TaskController::class, 'task_arcrived']);
+    Route::post('task_review', [TaskController::class, 'task_review']);
 
     Route::get('get_task_category', [TaskCategoryCon::class, 'get_task_category']);
     Route::post('create_task_category', [TaskCategoryCon::class, 'create_task_category']);
@@ -85,6 +87,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('updateStatus/{id}/{status}', [LeaveController::class, 'update_status']);
     Route::get('userWiseLeave', [LeaveController::class, 'user_wise_leave']);
     Route::get('user_wise_leave_with_id/{id}', [LeaveController::class, 'user_wise_leave_with_id']);
+    Route::get('get_leave_report/{user_id}', [LeaveController::class, 'get_leave_report']);
+
 
 
     // User data

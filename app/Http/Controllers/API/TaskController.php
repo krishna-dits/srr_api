@@ -193,4 +193,15 @@ class TaskController extends Controller
             return response()->json(['success' => 1, 'message' => 'Task archived successfully.'], 200);
         }
     }
+
+    public function get_archive_task_for_user(Request $request)
+    {
+        $tasks = Task::whereJsonContains('user_ids', $request->user_id)->onlyTrashed()->get();
+        return response()->json(['success' => 1, 'task' => TaskResource::collection($tasks)], 200);
+    }
+
+    public function task_review(Request $request)
+    {
+        
+    }
 }
