@@ -26,7 +26,7 @@ class TaskReviewController extends Controller
 
     public function get_task_review(Request $request)
     {
-        $TaskReview = TaskReview::whereUserId($request->user_id)->with('get_task')->get();
+        $TaskReview = TaskReview::whereJsonContains('user_id', $request->user_id)->with('get_task')->get();
         return response()->json(['success' => 1, 'data' => $TaskReview], 200);
     }
 }
