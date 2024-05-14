@@ -12,8 +12,7 @@
             <div class="border-0">
                 <div class="tab-content">
                     <div class="tab-pane active" id="tab-7">
-                        <form class="form-horizontal" enctype="multipart/form-data" method="POST"
-                            action="">
+                        <form class="form-horizontal" enctype="multipart/form-data" method="POST" action="">
                             @csrf
                             <div class="card">
                                 <div class="card-body">
@@ -60,8 +59,7 @@
                                         <div class="form-group col-md-3">
                                             <label for="yst">Select User <span class="text-danger">*</span></label>
                                             <select name="user_ids[]" class="form-control select2-show-search"
-                                                id="yst" required>
-                                                <option value="" selected disabled>Select</option>
+                                                id="yst" required multiple>
                                                 @foreach ($users as $user)
                                                     <option value="{{ $user['id'] }}">{{ $user['name'] }}</option>
                                                 @endforeach
@@ -70,6 +68,29 @@
                                                 <small class="text-danger">{{ $message }}</small>
                                             @enderror
                                         </div>
+
+
+                                        {{-- <div class="form-group col-md-3">
+                                            <label class="form-label">Users list</label>
+                                            <select class="form-control select2" name="user_ids[]" data-placeholder="Choose Browser" multiple>
+                                                <option value="Firefox">
+                                                    Firefox
+                                                </option>
+                                                <option value="Chrome selected">
+                                                    Chrome
+                                                </option>
+                                                <option value="Safari">
+                                                    Safari
+                                                </option>
+                                                <option selected value="Opera">
+                                                    Opera
+                                                </option>
+                                                <option value="Internet Explorer">
+                                                    Internet Explorer
+                                                </option>
+                                            </select>
+                                        </div> --}}
+
 
                                         <div class="form-group col-md-3">
                                             <label for="yst">Priority <span class="text-danger">*</span></label>

@@ -56,7 +56,11 @@ class AuthController extends Controller
     {
         try {
 
-            $user = User::where('id', $request->id)->first();
+            $user = User::where('id', $request->user_id)->first();
+
+            if (empty($user)) {
+                return response()->json(['success' => 0, 'message' => 'User not found.'], 500);
+            }
 
             if ($request->hasfile('profile_image')) {
                 $file = $request->file('profile_image');
@@ -68,16 +72,19 @@ class AuthController extends Controller
 
             $user->name = $request->name;
             $user->email = $request->email;
-            $user->phone_no = $request->phone_no;
+            $user->phone_no = $request->phone;
             $user->profile_image = $filename;
             $user->dob = $request->dob;
             $user->gender = $request->gender;
-            $user->guardian_name = $request->guardian_name;
+            $user->present_address = $request->present_address;
             $user->marital_status = $request->marital_status;
-            $user->save();
+            $user->update();
+
+            $user = new UserResource($user);
 
             return response()->json(['success' => 1, 'message' => 'User Updated Sucessfully', 'data' => $user], 200);
         } catch (\Throwable $th) {
+            return $th;
             return response()->json(['success' => 0, 'message' => 'Internal server errors.'], 500);
         }
     }

@@ -34,7 +34,7 @@ class TaskController extends Controller
                 'priority'       => $request->priority,
                 'category_id'    => $request->category_id,
                 'project_id'     => $request->project_id,
-                'status'         => 'pending',
+                'status'         => 'Yet to start',
                 'document'       => $filename,
             ];
 
@@ -71,7 +71,6 @@ class TaskController extends Controller
             $task->priority       = $request->priority;
             $task->category_id    = $request->category_id;
             $task->project_id     = $request->project_id;
-            $task->status         = 'pending';
             $task->document       = $filename;;
 
             $task->update();

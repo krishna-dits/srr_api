@@ -26,8 +26,7 @@ class UserController extends Controller
     // GET /User-add
     public function userlist()
     {
-        $all_user = User::where('is_delete', '0')
-            ->get();
+        $all_user = User::get();
         return view('appPages.Users.user-list', compact('all_user'));
     }
 

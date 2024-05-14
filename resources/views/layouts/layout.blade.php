@@ -186,6 +186,11 @@ $login_details = DB::table('users')->where('id', Auth::id())->where('is_active',
                                                             class="fas fa-caret-right"></i>&nbsp;&nbsp;Create
                                                         Task</a>
                                                 </li>
+                                                <li>
+                                                    <a href="{{ route('task_list') }}"
+                                                        class="navdropdwn_menuztext"><i
+                                                            class="fas fa-caret-right"></i>&nbsp;&nbsp;Task List</a>
+                                                </li>
                                             </ul>
                                         </li>
                                         @if (auth()->user()->can('User'))
