@@ -155,11 +155,11 @@ $login_details = DB::table('users')->where('id', Auth::id())->where('is_active',
                                                     </a>
                                                     <ul class=" dropdown-menu">
                                                         @can('view role')
-                                                                                                                                    <li><a href="{{ route('roleList') }}" class="navdropdwn_menuztext"><i class="fas fa-caret-right"></i>&nbsp;&nbsp;Role</a></li>
+                                                                                                                                            <li><a href="{{ route('roleList') }}" class="navdropdwn_menuztext"><i class="fas fa-caret-right"></i>&nbsp;&nbsp;Role</a></li>
                                                         @endcan
 
                                                         @can('view permission')
-                                                                                                                                    <li><a href="{{ route('PermissionList') }}" class="navdropdwn_menuztext">Permission</a></li>
+                                                                                                                                            <li><a href="{{ route('PermissionList') }}" class="navdropdwn_menuztext">Permission</a></li>
                                                         @endcan
                                                     </ul>
                                                 </li> -->
@@ -180,6 +180,12 @@ $login_details = DB::table('users')->where('id', Auth::id())->where('is_active',
                                                         Category</a>
                                                 </li>
 
+                                                <li>
+                                                    <a href="{{ route('create_task') }}"
+                                                        class="navdropdwn_menuztext"><i
+                                                            class="fas fa-caret-right"></i>&nbsp;&nbsp;Create
+                                                        Task</a>
+                                                </li>
                                             </ul>
                                         </li>
                                         @if (auth()->user()->can('User'))

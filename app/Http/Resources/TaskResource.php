@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Models\User;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class TaskResource extends JsonResource
@@ -14,7 +15,6 @@ class TaskResource extends JsonResource
      */
     public function toArray($request)
     {
-        // $users = json_decode($this->user_ids, true);
 
         return [
             'id'            => $this->id,
@@ -23,6 +23,7 @@ class TaskResource extends JsonResource
             'start_date'    => $this->start_date,
             'end_date'      => $this->end_date,
             'user_ids'      => json_decode($this->user_ids, true),
+            'user_name'     => User::get()->whereIn('id', json_decode($this->user_ids, true))->pluck('name'),
             'assign_user_id' => $this->assign_user_id,
             'priority'      => $this->priority,
             'category_id'   => $this->category_id,

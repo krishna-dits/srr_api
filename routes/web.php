@@ -18,6 +18,7 @@ use App\Http\Controllers\TcMasterController;
 use App\Http\Controllers\ReportsController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Task\CategoryController;
+use App\Http\Controllers\Task\TaskController;
 
 /*
 |--------------------------------------------------------------------------
@@ -191,6 +192,11 @@ Route::group(['middleware' => ['permission:Set Up']], function () {
     Route::get('delete-category/{id?}', [CustomerController::class, 'delete_category'])->name('delete_category');
 });
 
+
+Route::prefix('task')->group(function () {
+    Route::match(['get', 'post'], 'create', [TaskController::class, 'create_task'])->name('create_task');
+    Route::get('list', [TaskController::class, 'task_list'])->name('task_list');
+});
 
 // Route::middleware([])->group(function () {
 //     Route::match(['get', 'post'], 'add-task', [])

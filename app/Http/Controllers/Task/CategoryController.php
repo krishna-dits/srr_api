@@ -31,7 +31,7 @@ class CategoryController extends Controller
         }
 
         $data = TaskCategory::get();
-        return view('task.index', compact('data', 'category'));
+        return view('task.create_task_category', compact('data', 'category'));
     }
 
 
