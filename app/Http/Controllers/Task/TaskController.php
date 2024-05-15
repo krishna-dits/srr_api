@@ -117,7 +117,7 @@ class TaskController extends Controller
             if ($task) {
                 return redirect(route('task_list'))->with('success', 'Task created successfully.');
             } else {
-                return redirect()->back()->with('success', 'Something went wrong.');
+                return redirect()->back()->with('error', 'Something went wrong.');
             }
 
             return view('task.add_task');
@@ -129,13 +129,14 @@ class TaskController extends Controller
 
 
 
-    public function task_list($type = null, $user_id = null)
+    public function task_list(Request $request)
     {
         $tasks = Task::get();
 
         foreach ($tasks as $value) {
             $users = json_decode($value['user_ids'], true);
             $value['user_names'] = User::select('name')->whereIn('id', $users)->get()->toArray();
+            $value['document'] = $value['document'] ? url('/') . '/public/assets/task/document/' . $value['document'] : null;
         }
 
         // dd($tasks->toArray());
@@ -147,7 +148,7 @@ class TaskController extends Controller
         $task = Task::whereId($id)->first();
 
         if (empty($task)) {
-            return response()->json(['success' => 0, 'message' => 'Task not found.']);
+            return response()->json(['success' => '0', 'message' => 'Task not found.']);
         }
 
         $statuses = ['Yet to start', 'In progress', 'Completed'];
@@ -157,9 +158,22 @@ class TaskController extends Controller
             $task->status = $status;
             $task->update();
 
-            return response()->json(['success' => 1, 'message' => 'Task status updated successfully..']);
+            return response()->json(['success' => '1', 'message' => 'Task status updated successfully..']);
         } else {
-            return response()->json(['success' => 0, 'message' => 'Invalid status.']);
+            return response()->json(['success' => '0', 'message' => 'Invalid status.']);
         }
+    }
+
+    public function delete_task($id)
+    {
+        $task = Task::whereId($id)->first();
+
+        if (empty($task)) {
+            return redirect()->back()->with('error', 'Task not found.');
+        }
+
+        $task->forceDelete();
+
+        return redirect()->back()->with('success', 'Task deleted successfully.');
     }
 }

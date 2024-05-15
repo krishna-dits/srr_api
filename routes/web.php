@@ -35,7 +35,7 @@ Route::get('/', function () {
     return redirect('/login');
 });
 
-Route::match(['get', 'post'],'password-reset-url/{token}', [UserController::class, 'password_reset']);
+Route::match(['get', 'post'], 'password-reset-url/{token}', [UserController::class, 'password_reset']);
 
 // Route::get('/dashboard', function () {
 //     return view('appPages/dashboard');
@@ -200,6 +200,7 @@ Route::prefix('task')->group(function () {
     Route::match(['get', 'post'], 'update/{id}', [TaskController::class, 'update_task'])->name('update_task');
     Route::get('list', [TaskController::class, 'task_list'])->name('task_list');
     Route::get('status/{id}/{status}', [TaskController::class, 'task_status']);
+    Route::get('delete/{id}', [TaskController::class, 'delete_task'])->name('delete_task');
 });
 
 // Route::middleware([])->group(function () {

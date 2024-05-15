@@ -43,7 +43,8 @@
                                             <input type="date"
                                                 class="form-control @error('start_date') is-invalid @enderror"
                                                 id="inputPassword3" name="start_date" placeholder="Password"
-                                                value="{{ isset($task) ? $task->start_date : '' }}" required>
+                                                value="{{ isset($task) ? date('Y-m-d', strtotime($task->start_date)) : '' }}"
+                                                required>
                                             @error('start_date')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
@@ -53,18 +54,27 @@
                                             <input type="date"
                                                 class="form-control @error('end_date') is-invalid @enderror"
                                                 id="inputPassword3" name="end_date" placeholder="Password" required
-                                                value="{{ old('end_data', isset($task) ? $task->end_data : '') }}">
+                                                value="{{ old('end_data', isset($task) ? date('Y-m-d', strtotime($task->end_date)) : '') }}">
                                             @error('end_date')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
                                         </div>
+
+                                        @php
+                                            $task_user = [];
+                                            if (isset($task)) {
+                                                $task_user = json_decode($task, true);
+                                            }
+                                        @endphp
 
                                         <div class="form-group col-md-3">
                                             <label for="yst">Select User <span class="text-danger">*</span></label>
                                             <select name="user_ids[]" class="form-control select2-show-search"
                                                 id="yst" required multiple>
                                                 @foreach ($users as $user)
-                                                    <option value="{{ $user['id'] }}">{{ $user['name'] }}</option>
+                                                    <option value="{{ $user['id'] }}">
+                                                        {{ $user['name'] }}
+                                                    </option>
                                                 @endforeach
                                             </select>
                                             @error('user_ids')
@@ -99,11 +109,16 @@
                                             <label for="yst">Priority <span class="text-danger">*</span></label>
                                             <select name="priority" class="form-control select2-show-search" id="yst"
                                                 required>
-                                                <option value="" selected disabled>Select priority</option>
-                                                <option value="high">High</option>
-                                                <option value="high">High</option>
-                                                <option value="high">High</option>
-                                                <option value="high">High</option>
+                                                <option value="high"
+                                                    {{ isset($task) && $task->priority == 'high' ? 'selected' : '' }}>High
+                                                </option>
+                                                <option value="medium"
+                                                    {{ isset($task) && $task->priority == 'medium' ? 'selected' : '' }}>
+                                                    Medium
+                                                </option>
+                                                <option value="low"
+                                                    {{ isset($task) && $task->priority == 'low' ? 'selected' : '' }}>Low
+                                                </option>
                                             </select>
                                             @error('user_ids')
                                                 <small class="text-danger">{{ $message }}</small>
@@ -114,11 +129,22 @@
                                             <label for="yst">Select Category <span class="text-danger">*</span></label>
                                             <select name="category_id" class="form-control select2-show-search"
                                                 id="yst" required>
-                                                <option value="" selected disabled>Select Category</option>
-                                                <option value="a">A</option>
-                                                <option value="b">B</option>
-                                                <option value="c">C</option>
-                                                <option value="d">D</option>
+                                                <option value="Admin"
+                                                    {{ isset($task) && $task->category_id == 'Admin' ? 'selected' : '' }}>
+                                                    Admin
+                                                </option>
+                                                <option value="Office"
+                                                    {{ isset($task) && $task->category_id == 'Office' ? 'selected' : '' }}>
+                                                    Office
+                                                </option>
+                                                <option value="Tender"
+                                                    {{ isset($task) && $task->category_id == 'Tender' ? 'selected' : '' }}>
+                                                    Tender
+                                                </option>
+                                                <option value="Logistic"
+                                                    {{ isset($task) && $task->category_id == '	Logistic' ? 'selected' : '' }}>
+                                                    Logistic
+                                                </option>
                                             </select>
                                             @error('category_id')
                                                 <small class="text-danger">{{ $message }}</small>
@@ -131,9 +157,13 @@
                                             @error('document')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
+
+                                            @if (!empty($task->document))
+                                                <a href="{{ url('/') . '/public/assets/task/document/' . $task->document }}"
+                                                    download>View
+                                                    Document</a>
+                                            @endif
                                         </div>
-
-
                                     </div>
                                 </div>
                                 <div class="card-body border-top">

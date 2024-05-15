@@ -4,7 +4,7 @@
         <div class="col-lg-12 col-xl-12 col-md-12 col-sm-12">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title">User List</h4>
+                    <h4 class="card-title">Task List</h4>
                 </div>
                 <!-- ================================ Alert Message===================================== -->
 
@@ -48,19 +48,26 @@
                                             @endforeach
                                         </td>
                                         <td>
-                                            <a href="">
-                                                View document
-                                            </a>
+                                            @if ($item['document'])
+                                                <a href="{{ $item['document'] }}" download>
+                                                    View document
+                                                </a>
+                                            @else
+                                                N/A
+                                            @endif
                                         </td>
                                         <td>
-                                            <select onchange="statusChange({{ $item->id }}, value)">
+                                            <select>
                                                 <option value="Yet to start"
+                                                    onclick="statusChange({{ $item->id }}, value)"
                                                     {{ $item->status == 'Yet to start' ? 'selected' : '' }}>Yet to start
                                                 </option>
                                                 <option value="In progress"
+                                                    onclick="statusChange({{ $item->id }}, value)"
                                                     {{ $item->status == 'In progress' ? 'selected' : '' }}>In progress
                                                 </option>
                                                 <option value="Completed"
+                                                    onclick="statusChange({{ $item->id }}, value)"
                                                     {{ $item->status == 'Completed' ? 'selected' : '' }}>Completed
                                                 </option>
                                             </select>
@@ -72,20 +79,15 @@
                                                     aria-haspopup="true" aria-expanded="false">Action <i
                                                         class="fa fa-caret-down"></i></a>
                                                 <div class="dropdown-menu dropdown-menu-right" style="">
-                                                    @can('user active deactive')
-                                                        @if ($item->id != Auth::id())
-                                                            <a class="dropdown-item"
-                                                                href="{{ route('user-enable-disable', base64_encode($item->id)) }}"><i
-                                                                    class="fa fa-user-circle"></i> Enable/Disable</a>
-                                                        @endif
-                                                    @endcan
-
                                                     @if (auth()->user()->can('user edit') || $item->id == Auth::id())
                                                         <a class="dropdown-item"
                                                             href="{{ route('update_task', ['id' => $item->id]) }}"><i
                                                                 class="fa fa-edit"></i> Edit</a>
                                                     @endif
 
+                                                    <a class="dropdown-item"
+                                                        href="{{ route('delete_task', ['id' => $item->id]) }}"><i
+                                                            class="fa fa-trash"></i> Delete</a>
                                                 </div>
                                             </div>
                                         </td>
@@ -101,6 +103,7 @@
 
     <script>
         function statusChange(id, status) {
+            console.log(78956);
             fetch(`{{ url('/') }}` + '/task/status/' + id + '/' + status)
                 .then(response => {
                     if (!response.ok) {
@@ -111,7 +114,7 @@
                 .then(data => {
                     // console.log('Data:', data);
 
-                    if (data.success == 1) {
+                    if (data.success === '1') {
                         swal("Done", data.message, "success");
                     }
                 })

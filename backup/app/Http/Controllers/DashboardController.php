@@ -10,24 +10,20 @@ use App\Models\GradeMaster;
 use App\Models\IsMaster;
 use App\Models\PoDoMaster;
 use App\Models\SizeMaster;
+use App\Models\Task;
 use App\Models\TcMaster;
 use App\Models\ThicknessMaster;
+use App\Models\User;
 
 class DashboardController extends Controller
 {
     public function dashboard()
     {
-        $all_customers = Customer::count();
+        $all_user = User::count();
+        $yet_to_start_task = Task::whereStatus('Yet to start')->count();
+        $in_progress_task = Task::whereStatus('In progress')->count();
+        $completed_task = Task::whereStatus('Completed')->count();
 
-        $is_no = IsMaster::count();
-        $size_no = SizeMaster::count();
-        $thickness_no = ThicknessMaster::count();
-        $grade_no = GradeMaster::count();
-        $podo_no = PoDoMaster::count();
-        $coil_no = CoilMaster::count();
-        $batch_no = Batch::count();
-        $tc_no = TcMaster::count();
-
-        return view('appPages.dashboard', compact('all_customers', 'size_no', 'is_no', 'thickness_no', 'grade_no', 'podo_no', 'coil_no', 'batch_no', 'tc_no'));
+        return view('appPages.dashboard', compact('all_user', 'yet_to_start_task', 'in_progress_task', 'completed_task'));
     }
 }
