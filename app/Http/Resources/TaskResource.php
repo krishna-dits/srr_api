@@ -27,7 +27,7 @@ class TaskResource extends JsonResource
             'assign_user_id' => $this->assign_user_id,
             'priority'      => $this->priority,
             'category_id'   => $this->category_id,
-            'document'      => url('/') . '/public/assets/task/document/' . $this->document,
+            'document'      => $this->document ? url('/') . '/public/assets/task/document/' . $this->document : null,
             'status'        => $this->status
         ];
     }

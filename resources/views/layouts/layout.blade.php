@@ -130,40 +130,23 @@ $login_details = DB::table('users')->where('id', Auth::id())->where('is_active',
                                             </li>
                                         @endif
 
-                                        @if (auth()->user()->can('Set Up'))
-                                            <li class="dropdown">
-                                                <a data-toggle="dropdown" class="dropdown-toggle">
-                                                    {{--  <i class="fas fa-cog topheadermenu_icon"></i>  --}}
-                                                    <img src="{{ asset('public/assets/images/brand/settings (2).png') }}"
-                                                        alt="img">
-                                                    Setup
-                                                    <span class="caret"></span>
-                                                </a>
-                                                <ul class=" dropdown-menu">
-                                                    @if (auth()->user()->can('General Setting'))
-                                                        <li>
-                                                            <a href="{{ route('general_setting_details') }}"
-                                                                class="navdropdwn_menuztext"><i
-                                                                    class="fas fa-caret-right"></i>&nbsp;&nbsp;General
-                                                                Setting</a>
-                                                        </li>
-                                                    @endif
-                                                    <!-- <li>
-                                                    <a href="#" data-toggle="dropdown" class="dropdown-toggle navdropdwn_menuztext">
-                                                        Role & Permission
-                                                        <span class="caret"></span>
-                                                    </a>
-                                                    <ul class=" dropdown-menu">
-                                                        @can('view role')
-                                                                                                                                            <li><a href="{{ route('roleList') }}" class="navdropdwn_menuztext"><i class="fas fa-caret-right"></i>&nbsp;&nbsp;Role</a></li>
-                                                        @endcan
-
-                                                        @can('view permission')
-                                                                                                                                            <li><a href="{{ route('PermissionList') }}" class="navdropdwn_menuztext">Permission</a></li>
-                                                        @endcan
-                                                    </ul>
-                                                </li> -->
-                                                @endcan
+                                        <li class="dropdown">
+                                            <a data-toggle="dropdown" class="dropdown-toggle">
+                                                {{--  <i class="fas fa-cog topheadermenu_icon"></i>  --}}
+                                                <img src="{{ asset('public/assets/images/brand/settings (2).png') }}"
+                                                    alt="img">
+                                                Setup
+                                                <span class="caret"></span>
+                                            </a>
+                                            <ul class=" dropdown-menu">
+                                                @if (auth()->user()->can('General Setting'))
+                                                    <li>
+                                                        <a href="{{ route('general_setting_details') }}"
+                                                            class="navdropdwn_menuztext"><i
+                                                                class="fas fa-caret-right"></i>&nbsp;&nbsp;General
+                                                            Setting</a>
+                                                    </li>
+                                                @endif
 
                                                 @if (auth()->user()->can('Customer'))
                                                     <li>
@@ -174,8 +157,7 @@ $login_details = DB::table('users')->where('id', Auth::id())->where('is_active',
                                                 @endif
 
                                                 <li>
-                                                    <a href="{{ route('category') }}"
-                                                        class="navdropdwn_menuztext"><i
+                                                    <a href="{{ route('category') }}" class="navdropdwn_menuztext"><i
                                                             class="fas fa-caret-right"></i>&nbsp;&nbsp;Task
                                                         Category</a>
                                                 </li>
@@ -189,10 +171,42 @@ $login_details = DB::table('users')->where('id', Auth::id())->where('is_active',
                                                 <li>
                                                     <a href="{{ route('task_list') }}"
                                                         class="navdropdwn_menuztext"><i
-                                                            class="fas fa-caret-right"></i>&nbsp;&nbsp;Task List</a>
+                                                            class="fas fa-caret-right"></i>&nbsp;&nbsp;Task
+                                                        List</a>
                                                 </li>
                                             </ul>
                                         </li>
+
+                                        <li class="dropdown">
+                                            <a data-toggle="dropdown" class="dropdown-toggle">
+                                                {{--  <i class="fas fa-cog topheadermenu_icon"></i>  --}}
+                                                <img src="{{ asset('public/assets/images/brand/file.png') }}"
+                                                    alt="img">
+                                                Task
+                                                <span class="caret"></span>
+                                            </a>
+                                            <ul class=" dropdown-menu">
+                                                {{-- <li>
+                                                    <a href="{{ route('category') }}" class="navdropdwn_menuztext"><i
+                                                            class="fas fa-caret-right"></i>&nbsp;&nbsp;Task
+                                                        Category</a>
+                                                </li> --}}
+
+                                                <li>
+                                                    <a href="{{ route('create_task') }}"
+                                                        class="navdropdwn_menuztext"><i
+                                                            class="fas fa-caret-right"></i>&nbsp;&nbsp;Create
+                                                        Task</a>
+                                                </li>
+                                                <li>
+                                                    <a href="{{ route('task_list') }}"
+                                                        class="navdropdwn_menuztext"><i
+                                                            class="fas fa-caret-right"></i>&nbsp;&nbsp;Task
+                                                        List</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+
                                         @if (auth()->user()->can('User'))
                                             <li class="dropdown">
                                                 <a data-toggle="dropdown" class="dropdown-toggle">
@@ -241,78 +255,78 @@ $login_details = DB::table('users')->where('id', Auth::id())->where('is_active',
                                                 </ul>
                                             </li>
                                         @endif
-                                </ul>
-                            </div>
-                            <div class="userprofile_icon" id="usertop_area">
-                                <img class="menwork_design"
-                                    src="{{ asset('public/assets/images/brand/add-friend.png') }}"
-                                    alt="img">
-                                <div class="userdetails_area" id="userdown_area">
-                                    <i class="fas fa-chevron-up chvrntop_design"></i>
-                                    <h2 class="usertext_namedesign">
-
-                                    </h2>
-                                    <h6 class="userdesignation_textdesign">
-
-                                    </h6>
-                                    <hr class="gaparea">
-                                    <ul class="useranother_listarea">
-                                        <li>
-                                            <a
-                                                href="{{ route('user-profile') }}/{{ base64_encode(Auth::id()) }}">
-                                                <i class="fas fa-user"></i>
-                                                Profile
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="{{ route('change-password') }}">
-                                                <i class="fas fa-lock-open"></i>
-                                                Change Password
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <i class="fas fa-sign-in-alt"></i>
-                                            <form id="logout_form" method="POST"
-                                                action="{{ route('logout') }}">
-                                                @csrf
-
-                                                <div onclick="document.getElementById('logout_form').submit();">
-                                                    Sign
-                                                    Out</div>
-                                            </form>
-                                        </li>
-
                                     </ul>
                                 </div>
-                            </div>
-                        </nav>
+                                <div class="userprofile_icon" id="usertop_area">
+                                    <img class="menwork_design"
+                                        src="{{ asset('public/assets/images/brand/add-friend.png') }}"
+                                        alt="img">
+                                    <div class="userdetails_area" id="userdown_area">
+                                        <i class="fas fa-chevron-up chvrntop_design"></i>
+                                        <h2 class="usertext_namedesign">
+
+                                        </h2>
+                                        <h6 class="userdesignation_textdesign">
+
+                                        </h6>
+                                        <hr class="gaparea">
+                                        <ul class="useranother_listarea">
+                                            <li>
+                                                <a
+                                                    href="{{ route('user-profile') }}/{{ base64_encode(Auth::id()) }}">
+                                                    <i class="fas fa-user"></i>
+                                                    Profile
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="{{ route('change-password') }}">
+                                                    <i class="fas fa-lock-open"></i>
+                                                    Change Password
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <i class="fas fa-sign-in-alt"></i>
+                                                <form id="logout_form" method="POST"
+                                                    action="{{ route('logout') }}">
+                                                    @csrf
+
+                                                    <div onclick="document.getElementById('logout_form').submit();">
+                                                        Sign
+                                                        Out</div>
+                                                </form>
+                                            </li>
+
+                                        </ul>
+                                    </div>
+                                </div>
+                            </nav>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- ====================================navbar start=============================== -->
-        <div class="row">
-            @yield('content')
-        </div>
-    </div>
-    <!--Footer-->
-    <footer class="footer">
-        <div class="container">
-            <div class="row align-items-center flex-row-reverse">
-                <div class="col-md-12 col-sm-12 text-center">
-                    Copyright © 2022 <a href="#">{{ @$general_details->software_name }}</a>. Designed by <a
-                        href="https://devantitsolutions.com/" target="_blank">Devant IT Solutions Pvt. Ltd.</a>
-                    All rights reserved.
-                </div>
+            <!-- ====================================navbar start=============================== -->
+            <div class="row">
+                @yield('content')
             </div>
         </div>
-    </footer>
-    <!-- End Footer-->
-</div><!-- End Page -->
-<!-- Back to top -->
-<a href="#top" id="back-to-top"><i class="fe fe-chevrons-up"></i></a>
+        <!--Footer-->
+        <footer class="footer">
+            <div class="container">
+                <div class="row align-items-center flex-row-reverse">
+                    <div class="col-md-12 col-sm-12 text-center">
+                        Copyright © 2022 <a href="#">{{ @$general_details->software_name }}</a>. Designed by <a
+                            href="https://devantitsolutions.com/" target="_blank">Devant IT Solutions Pvt. Ltd.</a>
+                        All rights reserved.
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- End Footer-->
+    </div><!-- End Page -->
+    <!-- Back to top -->
+    <a href="#top" id="back-to-top"><i class="fe fe-chevrons-up"></i></a>
 
-{{-- <script type="text/javascript">
+    {{-- <script type="text/javascript">
         function get_all_item_result() {
             $('#search_result_for_item').empty();
             var item_search_name = $('#item_entry_reslt').val();
@@ -346,125 +360,125 @@ $login_details = DB::table('users')->where('id', Auth::id())->where('is_active',
     }
     }
     </script> --}}
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script>
-    setTimeout(function() {
-        var div = document.getElementById("attendence_modal");
-        div.parentNode.removeChild(div);
-    }, 10000); // 30 seconds in milliseconds
-</script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        setTimeout(function() {
+            var div = document.getElementById("attendence_modal");
+            div.parentNode.removeChild(div);
+        }, 10000); // 30 seconds in milliseconds
+    </script>
 
 
 
 
-<!-- Jquery js-->
-<script src="{{ asset('public/assets/js/jquery-3.5.1.min.js') }}"></script>
+    <!-- Jquery js-->
+    <script src="{{ asset('public/assets/js/jquery-3.5.1.min.js') }}"></script>
 
-<!-- Bootstrap4 js-->
-<script src="{{ asset('public/assets/plugins/bootstrap/popper.min.js') }}"></script>
-<script src="{{ asset('public/assets/plugins/bootstrap/js/bootstrap.min.js') }}"></script>
+    <!-- Bootstrap4 js-->
+    <script src="{{ asset('public/assets/plugins/bootstrap/popper.min.js') }}"></script>
+    <script src="{{ asset('public/assets/plugins/bootstrap/js/bootstrap.min.js') }}"></script>
 
-<!--Othercharts js-->
-<script src="{{ asset('public/assets/plugins/othercharts/jquery.sparkline.min.js') }}"></script>
+    <!--Othercharts js-->
+    <script src="{{ asset('public/assets/plugins/othercharts/jquery.sparkline.min.js') }}"></script>
 
-<!-- Circle-progress js-->
-<script src="{{ asset('public/assets/js/circle-progress.min.js') }}"></script>
+    <!-- Circle-progress js-->
+    <script src="{{ asset('public/assets/js/circle-progress.min.js') }}"></script>
 
-<!-- Jquery-rating js-->
-<script src="{{ asset('public/assets/plugins/rating/jquery.rating-stars.js') }}"></script>
+    <!-- Jquery-rating js-->
+    <script src="{{ asset('public/assets/plugins/rating/jquery.rating-stars.js') }}"></script>
 
-<!--Sidemenu js-->
-<script src="{{ asset('public/assets/plugins/sidemenu/sidemenu.js') }}"></script>
+    <!--Sidemenu js-->
+    <script src="{{ asset('public/assets/plugins/sidemenu/sidemenu.js') }}"></script>
 
-<!-- P-scroll js-->
-<script src="{{ asset('public/assets/plugins/p-scrollbar/p-scrollbar.js') }}"></script>
-<script src="{{ asset('public/assets/plugins/p-scrollbar/p-scroll1.js') }}"></script>
-<script src="{{ asset('public/assets/plugins/p-scrollbar/p-scroll.js') }}"></script>
-
-
-<!--INTERNAL Peitychart js-->
-<script src="{{ asset('public/assets/plugins/peitychart/jquery.peity.min.js') }}"></script>
-<script src="{{ asset('public/assets/plugins/peitychart/peitychart.init.js') }}"></script>
-
-<!--INTERNAL Apexchart js-->
-<script src="{{ asset('public/assets/js/apexcharts.js') }}"></script>
-
-<!--INTERNAL ECharts js-->
-<script src="{{ asset('public/assets/plugins/echarts/echarts.js') }}"></script>
-
-<!--INTERNAL Chart js -->
-<script src="{{ asset('public/assets/plugins/chart/chart.bundle.js') }}"></script>
-<script src="{{ asset('public/assets/plugins/chart/utils.js') }}"></script>
-
-<!-- INTERNAL Select2 js -->
-<script src="{{ asset('public/assets/plugins/select2/select2.full.min.js') }}"></script>
-<script src="{{ asset('public/assets/js/select2.js') }}"></script>
-
-<!--INTERNAL Moment js-->
-<script src="{{ asset('public/assets/plugins/moment/moment.js') }}"></script>
-
-<!--INTERNAL Index js-->
-<script src="{{ asset('public/assets/js/index1.js') }}"></script>
-
-<!-- Simplebar JS -->
-<script src="{{ asset('public/assets/plugins/simplebar/js/simplebar.min.js') }}"></script>
-<!-- Custom js-->
-<script src="{{ asset('public/assets/js/custom.js') }}"></script>
-
-<!-- INTERNAL Data tables -->
-<script src="{{ asset('public/assets/plugins/datatable/js/jquery.dataTables.js') }}"></script>
-<script src="{{ asset('public/assets/plugins/datatable/js/dataTables.bootstrap4.js') }}"></script>
-<script src="{{ asset('public/assets/plugins/datatable/js/dataTables.buttons.min.js') }}"></script>
-<script src="{{ asset('public/assets/plugins/datatable/js/buttons.bootstrap4.min.js') }}"></script>
-<script src="{{ asset('public/assets/plugins/datatable/js/jszip.min.js') }}"></script>
-<script src="{{ asset('public/assets/plugins/datatable/js/pdfmake.min.js') }}"></script>
-<script src="{{ asset('public/assets/plugins/datatable/js/vfs_fonts.js') }}"></script>
-<script src="{{ asset('public/assets/plugins/datatable/js/buttons.html5.min.js') }}"></script>
-<script src="{{ asset('public/assets/plugins/datatable/js/buttons.print.min.js') }}"></script>
-<script src="{{ asset('public/assets/plugins/datatable/js/buttons.colVis.min.js') }}"></script>
-<script src="{{ asset('public/assets/plugins/datatable/responsive.bootstrap4.min.js') }}"></script>
-<script src="{{ asset('public/assets/js/datatables.js') }}"></script>
-
-<script src="{{ asset('public/assets/plugins/flot/jquery.flot.js') }}"></script>
-<script src="{{ asset('public/assets/plugins/flot/jquery.flot.fillbetween.js') }}"></script>
-<script src="{{ asset('public/assets/plugins/flot/jquery.flot.pie.js') }}"></script>
-<script src="{{ asset('public/assets/js/flot.js') }}"></script>
+    <!-- P-scroll js-->
+    <script src="{{ asset('public/assets/plugins/p-scrollbar/p-scrollbar.js') }}"></script>
+    <script src="{{ asset('public/assets/plugins/p-scrollbar/p-scroll1.js') }}"></script>
+    <script src="{{ asset('public/assets/plugins/p-scrollbar/p-scroll.js') }}"></script>
 
 
+    <!--INTERNAL Peitychart js-->
+    <script src="{{ asset('public/assets/plugins/peitychart/jquery.peity.min.js') }}"></script>
+    <script src="{{ asset('public/assets/plugins/peitychart/peitychart.init.js') }}"></script>
 
-<!-- Switcher js-->
-<script src="{{ asset('public/assets/switcher/js/switcher.js') }}"></script>
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <!--INTERNAL Apexchart js-->
+    <script src="{{ asset('public/assets/js/apexcharts.js') }}"></script>
 
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-<script src="{{ asset('public/assets/plugins/notify/js/notifIt.js') }}"></script>
+    <!--INTERNAL ECharts js-->
+    <script src="{{ asset('public/assets/plugins/echarts/echarts.js') }}"></script>
+
+    <!--INTERNAL Chart js -->
+    <script src="{{ asset('public/assets/plugins/chart/chart.bundle.js') }}"></script>
+    <script src="{{ asset('public/assets/plugins/chart/utils.js') }}"></script>
+
+    <!-- INTERNAL Select2 js -->
+    <script src="{{ asset('public/assets/plugins/select2/select2.full.min.js') }}"></script>
+    <script src="{{ asset('public/assets/js/select2.js') }}"></script>
+
+    <!--INTERNAL Moment js-->
+    <script src="{{ asset('public/assets/plugins/moment/moment.js') }}"></script>
+
+    <!--INTERNAL Index js-->
+    <script src="{{ asset('public/assets/js/index1.js') }}"></script>
+
+    <!-- Simplebar JS -->
+    <script src="{{ asset('public/assets/plugins/simplebar/js/simplebar.min.js') }}"></script>
+    <!-- Custom js-->
+    <script src="{{ asset('public/assets/js/custom.js') }}"></script>
+
+    <!-- INTERNAL Data tables -->
+    <script src="{{ asset('public/assets/plugins/datatable/js/jquery.dataTables.js') }}"></script>
+    <script src="{{ asset('public/assets/plugins/datatable/js/dataTables.bootstrap4.js') }}"></script>
+    <script src="{{ asset('public/assets/plugins/datatable/js/dataTables.buttons.min.js') }}"></script>
+    <script src="{{ asset('public/assets/plugins/datatable/js/buttons.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('public/assets/plugins/datatable/js/jszip.min.js') }}"></script>
+    <script src="{{ asset('public/assets/plugins/datatable/js/pdfmake.min.js') }}"></script>
+    <script src="{{ asset('public/assets/plugins/datatable/js/vfs_fonts.js') }}"></script>
+    <script src="{{ asset('public/assets/plugins/datatable/js/buttons.html5.min.js') }}"></script>
+    <script src="{{ asset('public/assets/plugins/datatable/js/buttons.print.min.js') }}"></script>
+    <script src="{{ asset('public/assets/plugins/datatable/js/buttons.colVis.min.js') }}"></script>
+    <script src="{{ asset('public/assets/plugins/datatable/responsive.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('public/assets/js/datatables.js') }}"></script>
+
+    <script src="{{ asset('public/assets/plugins/flot/jquery.flot.js') }}"></script>
+    <script src="{{ asset('public/assets/plugins/flot/jquery.flot.fillbetween.js') }}"></script>
+    <script src="{{ asset('public/assets/plugins/flot/jquery.flot.pie.js') }}"></script>
+    <script src="{{ asset('public/assets/js/flot.js') }}"></script>
 
 
-<script>
-    (function($) {
-        $('.dropdown-menu a.dropdown-toggle').on('click', function(e) {
-            if (!$(this).next().hasClass('show')) {
-                $(this).parents('.dropdown-menu').first().find('.show').removeClass("show");
-            }
-            var $subMenu = $(this).next(".dropdown-menu");
-            $subMenu.toggleClass('show');
 
-            $(this).parents('li.nav-item.dropdown.show').on('hidden.bs.dropdown', function(e) {
-                $('.dropdown-submenu .show').removeClass("show");
+    <!-- Switcher js-->
+    <script src="{{ asset('public/assets/switcher/js/switcher.js') }}"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="{{ asset('public/assets/plugins/notify/js/notifIt.js') }}"></script>
+
+
+    <script>
+        (function($) {
+            $('.dropdown-menu a.dropdown-toggle').on('click', function(e) {
+                if (!$(this).next().hasClass('show')) {
+                    $(this).parents('.dropdown-menu').first().find('.show').removeClass("show");
+                }
+                var $subMenu = $(this).next(".dropdown-menu");
+                $subMenu.toggleClass('show');
+
+                $(this).parents('li.nav-item.dropdown.show').on('hidden.bs.dropdown', function(e) {
+                    $('.dropdown-submenu .show').removeClass("show");
+                });
+
+                return false;
             });
+        })(jQuery)
+    </script>
 
-            return false;
+    <script>
+        $(document).ready(function() {
+            $("#usertop_area").click(function() {
+                $("#userdown_area").toggle();
+            });
         });
-    })(jQuery)
-</script>
-
-<script>
-    $(document).ready(function() {
-        $("#usertop_area").click(function() {
-            $("#userdown_area").toggle();
-        });
-    });
-</script>
+    </script>
 </body>
 <!-- Mirrored from laravel.spruko.com/admitro/Vertical-IconSidedar-Light/index by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 21 Nov 2021 07:29:24 GMT -->
 

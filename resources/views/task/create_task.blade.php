@@ -21,7 +21,8 @@
                                         <div class="col-md-6">
                                             <label class="form-label">Task Title <span class="text-danger">*</span></label>
                                             <input type="text" class="form-control @error('title') is-invalid @enderror"
-                                                name="title" placeholder="Title" required value="{{ old('title') }}">
+                                                name="title" placeholder="Title" required
+                                                value="{{ old('title', isset($task) ? $task->title : '') }}">
                                             @error('title')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
@@ -32,7 +33,7 @@
                                             <input type="text"
                                                 class="form-control @error('description') is-invalid @enderror"
                                                 name="description" placeholder="Description" required
-                                                value="{{ old('description') }}">
+                                                value="{{ old('description', isset($task) ? $task->description : '') }}">
                                             @error('description')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
@@ -41,7 +42,8 @@
                                             <label class="form-label">Start Date <span class="text-danger">*</span></label>
                                             <input type="date"
                                                 class="form-control @error('start_date') is-invalid @enderror"
-                                                id="inputPassword3" name="start_date" placeholder="Password" required>
+                                                id="inputPassword3" name="start_date" placeholder="Password"
+                                                value="{{ isset($task) ? $task->start_date : '' }}" required>
                                             @error('start_date')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror
@@ -50,7 +52,8 @@
                                             <label class="form-label">End Date <span class="text-danger">*</span></label>
                                             <input type="date"
                                                 class="form-control @error('end_date') is-invalid @enderror"
-                                                id="inputPassword3" name="end_date" placeholder="Password" required>
+                                                id="inputPassword3" name="end_date" placeholder="Password" required
+                                                value="{{ old('end_data', isset($task) ? $task->end_data : '') }}">
                                             @error('end_date')
                                                 <span class="text-danger">{{ $message }}</span>
                                             @enderror

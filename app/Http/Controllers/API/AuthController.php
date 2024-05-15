@@ -90,22 +90,27 @@ class AuthController extends Controller
     }
 
 
-    public function forget_password()
+    public function forget_password(Request $request)
     {
-        // $otp = mt_rand(10000000, 99999999);
-        // $user = User::whereId(Auth::id())->first();
-        // $user-> = Hash::make($otp);
-        // $user->update();
+        $user = User::whereEmail($request->email)->first();
+        if (empty($user)) {
+            return response()->json(['success' => 0, 'message' => 'Please enter valid email.'], 200);
+        }
 
-        // $email_id = $user->email;
-        // Mail::send('emails.forget_pass', [
-        //     'name' => $user->name,
-        //     'password' => $otp
-        // ], function ($message) use ($email_id) {
-        //     $message->from('noreply.srrmail@gmail.com');
-        //     $message->to($email_id);
-        //     $message->subject("New password generate.");
-        // });
+        $token = md5(mt_rand(111111, 999999));
+
+        cache()->remember($token, 6000, function () use ($user) {
+            return $user->email;
+        });
+
+        $email_id = $user->email;
+        Mail::send('emails.forget_pass', [
+            'reset_url' => url('password-reset-url') . '/' . $token
+        ], function ($message) use ($email_id) {
+            $message->from('noreply.srrmail@gmail.com');
+            $message->to($email_id);
+            $message->subject("Password reset link.");
+        });
 
         return response()->json(['success' => 1, 'message' => 'Password reset link send to the email.'], 200);
     }

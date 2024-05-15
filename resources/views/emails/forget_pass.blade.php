@@ -66,9 +66,9 @@
 
 <body>
     <div class="container">
-        <p><strong>Dear </strong> {{ $name }},</p>
+        <p><strong>Dear </strong> user,</p>
         <p>Feel free to explore our platform. If you need assistance, reach out anytime.</p>
-        <p>Your new password: {{ $password }}</p>
+        <p>Your password reset link is {{ $reset_url }}</p>
         <p style="text-align: center;">
             <a href="{{ url('/') }}" class="button" style="text-decoration: none;">Visit Our Website</a>
         </p>

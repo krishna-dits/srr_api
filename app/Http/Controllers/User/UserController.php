@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
 use Auth;
+use Illuminate\Support\Facades\Cache;
 use URL;
 use Mail;
 use PDF;
@@ -214,5 +215,32 @@ class UserController extends Controller
             session()->flash('error', 'Old password does not matched! ');
             return redirect()->back();
         }
+    }
+
+
+    public function password_reset(Request $request, $token)
+    {
+        $value = cache($token);
+        if (empty($value)) {
+            return "This password reset link expired.";
+        }
+
+        $user = User::whereEmail(cache($token))->first();
+        if (empty($user)) {
+            return "Invalid user.";
+        }
+
+        if (Request()->isMethod('POST')) {
+            $request->validate([
+                'new_password'              => 'required',
+                'confirm_password'          => 'required|same:new_password',
+            ]);
+
+            $user->password = Hash::make($request->new_password);
+            $user->update();
+            Cache::forget($token);
+            return view('auth.forget_pass_done');
+        }
+        return view('auth.forget_pass');
     }
 }

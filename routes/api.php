@@ -41,6 +41,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 // LOGIN USER
 Route::post('login', [AuthController::class, 'loginUser']);
+Route::post('forget_password', [AuthController::class, 'forget_password']);
 
 // LOGOUT USER
 Route::group(['middleware' => ['auth:sanctum']], function () {
@@ -48,7 +49,6 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('logout', [AuthController::class, 'logout']);
     Route::get('user-data', [AuthController::class, 'user_data']);
     Route::post('update_user', [AuthController::class, 'update_user']);
-    Route::get('forget_password', [AuthController::class, 'forget_password']);
 
     // TASK MANAGEMENT
     Route::post('create_task', [TaskController::class, 'create_task']);

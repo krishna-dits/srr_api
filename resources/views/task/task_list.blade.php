@@ -28,7 +28,7 @@
                                 <th scope="col">Start Date</th>
                                 <th scope="col">End Date</th>
                                 <th scope="col">Members</th>
-
+                                <th scope="col">Document</th>
                                 <th scope="col">Status</th>
                                 <th scope="col">Action</th>
                             </tr>
@@ -39,20 +39,21 @@
                                     <tr>
                                         <th scope="row">{{ $loop->iteration }}</th>
                                         <td>{{ @$item->title }}</td>
-                                        <td>{{ @$item->start_date }}</td>
-                                        <td>{{ @$item->end_date }}</td>
+                                        <td>{{ date('d-m-Y', strtotime($item->start_date)) }}</td>
+                                        <td>{{ date('d-m-Y', strtotime($item->end_date)) }}</td>
 
                                         <td>
                                             @foreach ($item['user_names'] as $name)
                                                 <span class="heading-inverse bg-primary rounded">{{ $name['name'] }}</span>
                                             @endforeach
                                         </td>
-
                                         <td>
-                                            <select onchange="statusChange($item->id, value)">
-                                                <option value="Pending" {{ $item->status == 'Pending' ? 'selected' : '' }}>
-                                                    Pending
-                                                </option>
+                                            <a href="">
+                                                View document
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <select onchange="statusChange({{ $item->id }}, value)">
                                                 <option value="Yet to start"
                                                     {{ $item->status == 'Yet to start' ? 'selected' : '' }}>Yet to start
                                                 </option>
@@ -81,7 +82,7 @@
 
                                                     @if (auth()->user()->can('user edit') || $item->id == Auth::id())
                                                         <a class="dropdown-item"
-                                                            href="{{ route('user-edit', base64_encode($item->id)) }}"><i
+                                                            href="{{ route('update_task', ['id' => $item->id]) }}"><i
                                                                 class="fa fa-edit"></i> Edit</a>
                                                     @endif
 
@@ -96,8 +97,28 @@
                 </div>
             </div>
         </div>
-
     </div>
 
-    <script src="{{ asset('public/assets/js/jquery-3.6.0.min.js') }}"></script>
+    <script>
+        function statusChange(id, status) {
+            fetch(`{{ url('/') }}` + '/task/status/' + id + '/' + status)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    // console.log('Data:', data);
+
+                    if (data.success == 1) {
+                        swal("Done", data.message, "success");
+                    }
+                })
+                .catch(error => {
+                    console.error('There was a problem with the fetch operation:', error);
+                });
+
+        }
+    </script>
 @endsection

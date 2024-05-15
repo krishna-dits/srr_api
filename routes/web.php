@@ -35,6 +35,8 @@ Route::get('/', function () {
     return redirect('/login');
 });
 
+Route::match(['get', 'post'],'password-reset-url/{token}', [UserController::class, 'password_reset']);
+
 // Route::get('/dashboard', function () {
 //     return view('appPages/dashboard');
 // })->middleware(['auth'])->name('dashboard');
@@ -195,7 +197,9 @@ Route::group(['middleware' => ['permission:Set Up']], function () {
 
 Route::prefix('task')->group(function () {
     Route::match(['get', 'post'], 'create', [TaskController::class, 'create_task'])->name('create_task');
+    Route::match(['get', 'post'], 'update/{id}', [TaskController::class, 'update_task'])->name('update_task');
     Route::get('list', [TaskController::class, 'task_list'])->name('task_list');
+    Route::get('status/{id}/{status}', [TaskController::class, 'task_status']);
 });
 
 // Route::middleware([])->group(function () {
