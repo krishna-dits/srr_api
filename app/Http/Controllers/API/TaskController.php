@@ -91,7 +91,7 @@ class TaskController extends Controller
         try {
             if ($request->category_id && $request->status && $request->priority) {
 
-                $tasks = Task::whereCategoryId($request->category_id)->whereStatus($request->status)->wherePriority($request->priority)->with('getUser')->get();
+                $tasks = Task::whereCategoryId($request->category_id)->whereStatus($request->status)->wherePriority($request->priority)->get();
             } elseif ($request->category_id && $request->priority) {
 
                 $tasks = Task::whereCategoryId($request->category_id)->wherePriority($request->priority)->get();
@@ -212,5 +212,22 @@ class TaskController extends Controller
     {
         $tasks = Task::whereDate('start_date', Carbon::today())->get();
         return response()->json(['success' => 1, 'task' => TaskResource::collection($tasks)], 200);
+    }
+
+    public function task_count($user_id)
+    {
+        $yet_to_start_task = Task::whereJsonContains('user_ids', $user_id)->whereStatus('Yet to start')->count();
+        $in_progress_task = Task::whereJsonContains('user_ids', $user_id)->whereStatus('In progress')->count();
+        $completed_task = Task::whereJsonContains('user_ids', $user_id)->whereStatus('Completed')->count();
+        $failed_task = '2';
+
+        return response()->json(['success' => 1, 'yet_to_start_task' => $yet_to_start_task, 'in_progress_task' => $in_progress_task, 'completed_task' => $completed_task, 'failed_task' => $failed_task]);
+    }
+
+    public function failed_task($user_id)
+    {
+        $failed_task = Task::whereJsonContains('user_ids', $user_id)->whereDate('end_date', '<',  Carbon::today()->toDateString())->where('status', '!=', 'Completed')->get();
+
+        return response()->json(['success' => 1, 'failed_task' => TaskResource::collection($failed_task)]);
     }
 }

@@ -79,6 +79,9 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('get_task_review', [TaskReviewController::class, 'get_task_review']);
 
 
+    Route::get('task_count/{user_id}', [TaskController::class, 'task_count']);
+    Route::get('failed_task/{user_id}', [TaskController::class, 'failed_task']);
+
     //NOTES
     Route::get('getNotes', [NoteController::class, 'get_notes']);
     Route::get('getNotesById/{id}', [NoteController::class, 'getNotesById']);

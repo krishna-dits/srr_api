@@ -2,6 +2,92 @@
 @section('content')
     <div class="container-fluid">
         <div class="col-lg-12 col-xl-12 col-md-12 col-sm-12">
+            <div class="border-0">
+                <div class="tab-content">
+                    <div class="tab-pane active" id="tab-7">
+                        <form class="form-horizontal" enctype="multipart/form-data" method="POST" action="">
+                            @csrf
+                            <div class="card">
+                                <div class="card-body">
+                                    {{-- <h5 class="font-weight-bold"><i class="fa fa-cube"></i> User Details</h5> --}}
+                                    <div class="row">
+
+                                        <div class="col-md-3">
+                                            <label class="form-label">Category<span class="text-danger">*</span></label>
+                                            <select name="category_id" class="form-control">
+                                                <option value="" selected disabled>Selecte a category</option>
+                                                <option value="Admin"
+                                                    {{ isset($request) && $request->category_id == 'Admin' ? 'selected' : '' }}>
+                                                    Admin
+                                                </option>
+                                                <option value="Office"
+                                                    {{ isset($request) && $request->category_id == 'Office' ? 'selected' : '' }}>
+                                                    Office</option>
+                                                <option value="Logistic"
+                                                    {{ isset($request) && $request->category_id == 'Logistic' ? 'selected' : '' }}>
+                                                    Logistic</option>
+                                                <option value="Tender"
+                                                    {{ isset($request) && $request->category_id == 'Tender' ? 'selected' : '' }}>
+                                                    Tender</option>
+                                            </select>
+                                            @error('title')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <label class="form-label">Status</label>
+                                            <select name="status" class="form-control">
+                                                <option value="" selected disabled>Selecte a status</option>
+                                                <option value="Yet to start"
+                                                    {{ isset($request) && $request->status == 'Yet to start' ? 'selected' : '' }}>
+                                                    Yet to start</option>
+                                                <option value="In progress"
+                                                    {{ isset($request) && $request->status == 'In progress' ? 'selected' : '' }}>
+                                                    In progress</option>
+                                                <option value="Completed"
+                                                    {{ isset($request) && $request->status == 'Completed' ? 'selected' : '' }}>
+                                                    Completed</option>
+                                            </select>
+                                            @error('description')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <label class="form-label">Priority</label>
+                                            <select name="priority" id="" class="form-control">
+                                                <option value="" selected disabled>Select priority</option>
+                                                <option value="high"
+                                                    {{ isset($request) && $request->priority == 'high' ? 'selected' : '' }}>
+                                                    High</option>
+                                                <option value="medium"
+                                                    {{ isset($request) && $request->priority == 'medium' ? 'selected' : '' }}>
+                                                    Medium</option>
+                                                <option value="low"
+                                                    {{ isset($request) && $request->priority == 'low' ? 'selected' : '' }}>
+                                                    Low</option>
+                                            </select>
+                                            @error('description')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+                                        </div>
+
+                                        <div class="col-md-3 mt-5 text-center">
+                                            <button class="btn btn-primary" type="submit">Filter</button>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+
+
+
             <div class="card">
                 <div class="card-header">
                     <h4 class="card-title">Task List</h4>
@@ -9,8 +95,8 @@
                 <!-- ================================ Alert Message===================================== -->
 
                 @if (session('success'))
-                    <div class="alert alert-success" role="alert"><button type="button" class="close" data-dismiss="alert"
-                            aria-hidden="true">×</button>{{ session('success') }}</div>
+                    <div class="alert alert-success" role="alert"><button type="button" class="close"
+                            data-dismiss="alert" aria-hidden="true">×</button>{{ session('success') }}</div>
                 @endif
                 @if (session()->has('error'))
                     <div class="alert alert-danger" role="alert"><button type="button" class="close"

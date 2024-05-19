@@ -148,32 +148,6 @@ $login_details = DB::table('users')->where('id', Auth::id())->where('is_active',
                                                     </li>
                                                 @endif
 
-                                                @if (auth()->user()->can('Customer'))
-                                                    <li>
-                                                        <a href="{{ route('Customer-list') }}"
-                                                            class="navdropdwn_menuztext"><i
-                                                                class="fas fa-caret-right"></i>&nbsp;&nbsp;Customer</a>
-                                                    </li>
-                                                @endif
-
-                                                <li>
-                                                    <a href="{{ route('category') }}" class="navdropdwn_menuztext"><i
-                                                            class="fas fa-caret-right"></i>&nbsp;&nbsp;Task
-                                                        Category</a>
-                                                </li>
-
-                                                <li>
-                                                    <a href="{{ route('create_task') }}"
-                                                        class="navdropdwn_menuztext"><i
-                                                            class="fas fa-caret-right"></i>&nbsp;&nbsp;Create
-                                                        Task</a>
-                                                </li>
-                                                <li>
-                                                    <a href="{{ route('task_list') }}"
-                                                        class="navdropdwn_menuztext"><i
-                                                            class="fas fa-caret-right"></i>&nbsp;&nbsp;Task
-                                                        List</a>
-                                                </li>
                                             </ul>
                                         </li>
 
@@ -207,6 +181,33 @@ $login_details = DB::table('users')->where('id', Auth::id())->where('is_active',
                                             </ul>
                                         </li>
 
+                                        <li class="dropdown">
+                                            <a data-toggle="dropdown" class="dropdown-toggle">
+                                                {{--  <i class="fas fa-file topheadermenu_icon"></i>  --}}
+                                                <img src="{{ asset('public/assets/images/brand/file.png') }}"
+                                                    alt="img">Leave
+                                                <span class="caret"></span>
+                                            </a>
+                                            <ul class=" dropdown-menu">
+                                                <li>
+                                                    <a href="{{ route('all_leaves') }}"
+                                                        class="navdropdwn_menuztext"><i
+                                                            class="fas fa-caret-right"></i>&nbsp;&nbsp;All Leaves</a>
+                                                </li>
+                                                <li>
+                                                    <a href="{{ route('apply_leave') }}"
+                                                        class="navdropdwn_menuztext"><i
+                                                            class="fas fa-caret-right"></i>&nbsp;&nbsp;Apply Leave</a>
+                                                </li>
+                                                <li>
+                                                    <a href="{{ route('my_leaves') }}"
+                                                        class="navdropdwn_menuztext"><i
+                                                            class="fas fa-caret-right"></i>&nbsp;&nbsp;My Leaves</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+
+
                                         @if (auth()->user()->can('User'))
                                             <li class="dropdown">
                                                 <a data-toggle="dropdown" class="dropdown-toggle">
@@ -237,24 +238,15 @@ $login_details = DB::table('users')->where('id', Auth::id())->where('is_active',
                                             </li>
                                         @endif
 
-                                        @if (auth()->user()->can('User'))
-                                            <li class="dropdown">
-                                                <a data-toggle="dropdown" class="dropdown-toggle">
-                                                    {{--  <i class="fas fa-file topheadermenu_icon"></i>  --}}
-                                                    <img src="{{ asset('public/assets/images/brand/file.png') }}"
-                                                        alt="img">
-                                                    Reports
-                                                    <span class="caret"></span>
-                                                </a>
-                                                <ul class=" dropdown-menu">
-                                                    <li>
-                                                        <a href="#" class="navdropdwn_menuztext"><i
-                                                                class="fas fa-caret-right"></i>&nbsp;&nbsp;Batch
-                                                            Report</a>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                        @endif
+                                        <li>
+                                            <a href="{{ route('dashboard') }}">
+                                                {{--  <i class="fas fa-home topheadermenu_icon"></i>  --}}
+                                                <img src="{{ asset('public/assets/images/brand/dashboard (2).png') }}"
+                                                    alt="img">
+                                                Notes
+                                            </a>
+                                        </li>
+
                                     </ul>
                                 </div>
                                 <div class="userprofile_icon" id="usertop_area">

@@ -16,7 +16,7 @@
                             @csrf
                             <div class="card">
                                 <div class="card-body">
-                                    <h5 class="font-weight-bold"><i class="fa fa-cube"></i> User Details</h5>
+                                    <h5 class="font-weight-bold"><i class="fa fa-cube"></i> Task Details</h5>
                                     <div class="row">
                                         <div class="col-md-6">
                                             <label class="form-label">Task Title <span class="text-danger">*</span></label>
@@ -82,29 +82,6 @@
                                             @enderror
                                         </div>
 
-
-                                        {{-- <div class="form-group col-md-3">
-                                            <label class="form-label">Users list</label>
-                                            <select class="form-control select2" name="user_ids[]" data-placeholder="Choose Browser" multiple>
-                                                <option value="Firefox">
-                                                    Firefox
-                                                </option>
-                                                <option value="Chrome selected">
-                                                    Chrome
-                                                </option>
-                                                <option value="Safari">
-                                                    Safari
-                                                </option>
-                                                <option selected value="Opera">
-                                                    Opera
-                                                </option>
-                                                <option value="Internet Explorer">
-                                                    Internet Explorer
-                                                </option>
-                                            </select>
-                                        </div> --}}
-
-
                                         <div class="form-group col-md-3">
                                             <label for="yst">Priority <span class="text-danger">*</span></label>
                                             <select name="priority" class="form-control select2-show-search" id="yst"
@@ -168,8 +145,7 @@
                                 </div>
                                 <div class="card-body border-top">
                                     <button type="submit" class="btn btn-primary"><i class="fa fa-paper-plane"></i>
-                                        Create
-                                        User</button>
+                                        Create Task</button>
 
                                 </div>
                             </div>

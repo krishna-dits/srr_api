@@ -69,9 +69,9 @@
         <p><strong>Dear </strong> user,</p>
         <p>Feel free to explore our platform. If you need assistance, reach out anytime.</p>
         <p>Your password reset link is {{ $reset_url }}</p>
-        <p style="text-align: center;">
+        {{-- <p style="text-align: center;">
             <a href="{{ url('/') }}" class="button" style="text-decoration: none;">Visit Our Website</a>
-        </p>
+        </p> --}}
     </div>
     <div class="footer">
         <p>Best regards,<br>{{ config('app.name') }}</p>

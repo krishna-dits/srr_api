@@ -17,6 +17,7 @@ use App\Http\Controllers\CoilMasterController;
 use App\Http\Controllers\TcMasterController;
 use App\Http\Controllers\ReportsController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\Leave\LeaveController;
 use App\Http\Controllers\Task\CategoryController;
 use App\Http\Controllers\Task\TaskController;
 
@@ -198,10 +199,31 @@ Route::group(['middleware' => ['permission:Set Up']], function () {
 Route::prefix('task')->group(function () {
     Route::match(['get', 'post'], 'create', [TaskController::class, 'create_task'])->name('create_task');
     Route::match(['get', 'post'], 'update/{id}', [TaskController::class, 'update_task'])->name('update_task');
-    Route::get('list', [TaskController::class, 'task_list'])->name('task_list');
+    Route::match(['get', 'post'], 'list', [TaskController::class, 'task_list'])->name('task_list');
     Route::get('status/{id}/{status}', [TaskController::class, 'task_status']);
     Route::get('delete/{id}', [TaskController::class, 'delete_task'])->name('delete_task');
 });
+
+
+Route::prefix('leave')->group(function () {
+    Route::match(['get', 'post'], 'apply', [LeaveController::class, 'apply_leave'])->name('apply_leave');
+    Route::match(['get', 'post'], 'update_leave/{id}', [LeaveController::class, 'update_leave'])->name('update_leave');
+    Route::match(['get', 'post'], 'my_leaves', [LeaveController::class, 'my_leaves'])->name('my_leaves');
+    Route::get('details/{id}', [LeaveController::class, 'leaves_details'])->name('leaves_details');
+
+    Route::get('status/{id}/{status}', [LeaveController::class, 'leave_status']);
+    Route::match(['get', 'post'], 'all_leaves', [LeaveController::class, 'all_leaves'])->name('all_leaves');
+    // Route::get('delete/{id}', [LeaveController::class, 'delete_leave'])->name('delete_leave');
+});
+
+
+Route::prefix('note')->group(function () {
+    Route::match(['get', 'post'], 'save', [LeaveController::class, 'save_note'])->name('save_note');
+    Route::get('delete/{id}', [TaskController::class, 'delete_note'])->name('delete_note');
+});
+
+
+
 
 // Route::middleware([])->group(function () {
 //     Route::match(['get', 'post'], 'add-task', [])

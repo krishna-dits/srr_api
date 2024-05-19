@@ -131,7 +131,32 @@ class TaskController extends Controller
 
     public function task_list(Request $request)
     {
-        $tasks = Task::get();
+
+        if ($request->category_id && $request->status && $request->priority) {
+
+            $tasks = Task::whereCategoryId($request->category_id)->whereStatus($request->status)->wherePriority($request->priority)->get();
+        } elseif ($request->category_id && $request->priority) {
+
+            $tasks = Task::whereCategoryId($request->category_id)->wherePriority($request->priority)->get();
+        } elseif ($request->status && $request->priority) {
+
+            $tasks = Task::wherePriority($request->priority)->whereStatus($request->status)->get();
+        } elseif ($request->category_id && $request->status) {
+
+            $tasks = Task::whereCategoryId($request->category_id)->whereStatus($request->status)->get();
+        } elseif ($request->category_id) {
+
+            $tasks = Task::whereCategoryId($request->category_id)->get();
+        } elseif ($request->status) {
+
+            $tasks = Task::whereStatus($request->status)->get();
+        } elseif ($request->priority) {
+
+            $tasks = Task::wherePriority($request->priority)->get();
+        } else {
+            $tasks = Task::get();
+        }
+
 
         foreach ($tasks as $value) {
             $users = json_decode($value['user_ids'], true);
@@ -140,7 +165,7 @@ class TaskController extends Controller
         }
 
         // dd($tasks->toArray());
-        return view('task.task_list', compact('tasks'));
+        return view('task.task_list', compact('tasks', 'request'));
     }
 
     public function task_status($id, $status)
