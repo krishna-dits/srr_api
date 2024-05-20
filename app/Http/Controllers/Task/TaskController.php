@@ -38,6 +38,7 @@ class TaskController extends Controller
                 $endDate = Carbon::parse($request->end_date);
 
                 $leave = Leave::where('user_id', $user)
+                    ->where('status', '1')
                     ->where(function ($query) use ($startDate, $endDate) {
                         $query->whereBetween('from_date', [$startDate, $endDate])
                             ->orWhereBetween('to_date', [$startDate, $endDate])
@@ -51,7 +52,6 @@ class TaskController extends Controller
 
                 if ($leave) {
                     $user = User::whereId($user)->first();
-                    // return response()->json(['success' => 0, 'message' => "$user->name is on leave during the specified period"], 400);
                     return redirect()->back()->with('error', "$user->name is on leave during the specified period");
                 }
             }
@@ -119,6 +119,34 @@ class TaskController extends Controller
             ]);
 
             // dd($request->all());
+
+
+
+            foreach ($request->user_ids as $user) {
+                // Parse the dates
+                $startDate = Carbon::parse($request->start_date);
+                $endDate = Carbon::parse($request->end_date);
+
+                $leave = Leave::where('user_id', $user)
+                    ->where('status', '1')
+                    ->where(function ($query) use ($startDate, $endDate) {
+                        $query->whereBetween('from_date', [$startDate, $endDate])
+                            ->orWhereBetween('to_date', [$startDate, $endDate])
+                            ->orWhereDate('to_date', $startDate)
+                            ->orWhere(function ($query) use ($startDate, $endDate) {
+                                $query->where('from_date', '<=', $endDate)
+                                    ->where('to_date', '>=', $startDate);
+                            });
+                    })->exists();
+
+
+                if ($leave) {
+                    $user = User::whereId($user)->first();
+                    return redirect()->back()->with('error', "$user->name is on leave during the specified period");
+                }
+            }
+
+
 
             $filename = null;
             if ($request->hasfile('document')) {

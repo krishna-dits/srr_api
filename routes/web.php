@@ -229,7 +229,7 @@ Route::prefix('leave')->group(function () {
 
 
 Route::prefix('note')->group(function () {
-    Route::match(['get', 'post'], 'save', [LeaveController::class, 'save_note'])->name('save_note');
+    Route::match(['get', 'post'], 'my_note', [LeaveController::class, 'my_note'])->name('my_note');
     Route::get('delete/{id}', [TaskController::class, 'delete_note'])->name('delete_note');
 });
 

@@ -27,6 +27,7 @@ class TaskController extends Controller
                 $endDate = Carbon::parse($request->end_date);
 
                 $leave = Leave::where('user_id', $user)
+                    ->where('status', '1')
                     ->where(function ($query) use ($startDate, $endDate) {
                         $query->whereBetween('from_date', [$startDate, $endDate])
                             ->orWhereBetween('to_date', [$startDate, $endDate])
@@ -83,6 +84,32 @@ class TaskController extends Controller
     public function update_task(Request $request, $id)
     {
         try {
+
+            $users = json_decode($request->user_ids, true);
+            foreach ($users as $user) {
+                // Parse the dates
+                $startDate = Carbon::parse($request->start_date);
+                $endDate = Carbon::parse($request->end_date);
+
+                $leave = Leave::where('user_id', $user)
+                    ->where('status', '1')
+                    ->where(function ($query) use ($startDate, $endDate) {
+                        $query->whereBetween('from_date', [$startDate, $endDate])
+                            ->orWhereBetween('to_date', [$startDate, $endDate])
+                            ->orWhereDate('to_date', $startDate)
+                            ->orWhere(function ($query) use ($startDate, $endDate) {
+                                $query->where('from_date', '<=', $endDate)
+                                    ->where('to_date', '>=', $startDate);
+                            });
+                    })->exists();
+
+
+                if ($leave) {
+                    $user = User::whereId($user)->first();
+                    return response()->json(['success' => 0, 'message' => "$user->name is on leave during the specified period"], 400);
+                }
+            }
+
             $task = Task::where('id', $id)->withTrashed()->first();
 
             $filename = $task->document;
@@ -210,7 +237,7 @@ class TaskController extends Controller
     {
         Issue::whereTaskId($request->id)->withTrashed()->delete();
         TaskReview::whereTaskId($request->id)->delete();
-        Task::whereId($request->id)->forceDelete();
+        Task::whereId($request->id)->delete();
         return response()->json(['success' => 1, 'message' => 'Task deleted successfully.'], 200);
     }
 

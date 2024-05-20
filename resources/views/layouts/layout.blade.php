@@ -192,7 +192,8 @@ $login_details = DB::table('users')->where('id', Auth::id())->where('is_active',
                                                             class="fas fa-caret-right"></i>&nbsp;&nbsp;My Issue</a>
                                                 </li>
                                                 <li>
-                                                    <a href="{{ route('issue_list') }}" class="navdropdwn_menuztext"><i
+                                                    <a href="{{ route('issue_list') }}"
+                                                        class="navdropdwn_menuztext"><i
                                                             class="fas fa-caret-right"></i>&nbsp;&nbsp;Issue List</a>
                                                 </li>
                                             </ul>
@@ -258,7 +259,7 @@ $login_details = DB::table('users')->where('id', Auth::id())->where('is_active',
                                         <li>
                                             <a href="{{ route('dashboard') }}">
                                                 {{--  <i class="fas fa-home topheadermenu_icon"></i>  --}}
-                                                <img src="{{ asset('public/assets/images/brand/dashboard (2).png') }}"
+                                                <img src="{{ asset('public/assets/images/brand/file.png') }}"
                                                     alt="img">
                                                 Notes
                                             </a>
