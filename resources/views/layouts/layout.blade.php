@@ -165,7 +165,10 @@ $login_details = DB::table('users')->where('id', Auth::id())->where('is_active',
                                                             class="fas fa-caret-right"></i>&nbsp;&nbsp;Task
                                                         Category</a>
                                                 </li> --}}
-
+                                                <li>
+                                                    <a href="{{ route('my_task') }}" class="navdropdwn_menuztext"><i
+                                                            class="fas fa-caret-right"></i>&nbsp;&nbsp;My Task</a>
+                                                </li>
                                                 <li>
                                                     <a href="{{ route('create_task') }}"
                                                         class="navdropdwn_menuztext"><i
@@ -177,6 +180,20 @@ $login_details = DB::table('users')->where('id', Auth::id())->where('is_active',
                                                         class="navdropdwn_menuztext"><i
                                                             class="fas fa-caret-right"></i>&nbsp;&nbsp;Task
                                                         List</a>
+                                                </li>
+                                                <li>
+                                                    <a href="{{ route('my_archive_task') }}"
+                                                        class="navdropdwn_menuztext"><i
+                                                            class="fas fa-caret-right"></i>&nbsp;&nbsp;My Archive
+                                                        Task</a>
+                                                </li>
+                                                <li>
+                                                    <a href="{{ route('my_issue') }}" class="navdropdwn_menuztext"><i
+                                                            class="fas fa-caret-right"></i>&nbsp;&nbsp;My Issue</a>
+                                                </li>
+                                                <li>
+                                                    <a href="{{ route('issue_list') }}" class="navdropdwn_menuztext"><i
+                                                            class="fas fa-caret-right"></i>&nbsp;&nbsp;Issue List</a>
                                                 </li>
                                             </ul>
                                         </li>

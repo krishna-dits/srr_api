@@ -19,6 +19,7 @@ use App\Http\Controllers\ReportsController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Leave\LeaveController;
 use App\Http\Controllers\Task\CategoryController;
+use App\Http\Controllers\Task\IssueController;
 use App\Http\Controllers\Task\TaskController;
 
 /*
@@ -200,10 +201,20 @@ Route::prefix('task')->group(function () {
     Route::match(['get', 'post'], 'create', [TaskController::class, 'create_task'])->name('create_task');
     Route::match(['get', 'post'], 'update/{id}', [TaskController::class, 'update_task'])->name('update_task');
     Route::match(['get', 'post'], 'list', [TaskController::class, 'task_list'])->name('task_list');
+    Route::match(['get', 'post'], 'my_task', [TaskController::class, 'my_task'])->name('my_task');
+    Route::match(['get', 'post'], 'my_archive_task', [TaskController::class, 'my_archive_task'])->name('my_archive_task');
     Route::get('status/{id}/{status}', [TaskController::class, 'task_status']);
     Route::get('delete/{id}', [TaskController::class, 'delete_task'])->name('delete_task');
+    Route::get('archive_task/{id}/{status}', [TaskController::class, 'archive_task'])->name('archive_task');
 });
 
+Route::prefix('issue')->group(function () {
+    Route::match(['get', 'post'], 'create_issue/{task_id}', [IssueController::class, 'create_issue'])->name('create_issue');
+    Route::match(['get', 'post'], 'update_issue/{issue_id}', [IssueController::class, 'update_issue'])->name('update_issue');
+    Route::get('issue_list', [IssueController::class, 'issue_list'])->name('issue_list');
+    Route::get('my_issue', [IssueController::class, 'my_issue'])->name('my_issue');
+    Route::get('resolve_issue/{issue_id}', [IssueController::class, 'resolve_issue'])->name('resolve_issue');
+});
 
 Route::prefix('leave')->group(function () {
     Route::match(['get', 'post'], 'apply', [LeaveController::class, 'apply_leave'])->name('apply_leave');

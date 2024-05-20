@@ -2,13 +2,24 @@
 @section('content')
     <div class="container-fluid">
         <div class="col-xl-12 col-lg-12 col-md-12">
-            @if ($errors->any())
+
+            @if (session('success'))
+                <div class="alert alert-success" role="alert"><button type="button" class="close" data-dismiss="alert"
+                        aria-hidden="true">×</button>{{ session('success') }}</div>
+            @endif
+            @if (session()->has('error'))
+                <div class="alert alert-danger" role="alert"><button type="button" class="close" data-dismiss="alert"
+                        aria-hidden="true">×</button>{{ session('error') }}</div>
+            @endif
+
+
+            {{-- @if ($errors->any())
                 @foreach ($errors->all() as $error)
                     <div class="alert alert-danger mt-3" role="alert">
                         {{ $error }}
                     </div>
                 @endforeach
-            @endif
+            @endif --}}
             <div class="border-0">
                 <div class="tab-content">
                     <div class="tab-pane active" id="tab-7">

@@ -20,7 +20,7 @@ class IssueController extends Controller
         $issue = new Issue();
         $issue->issue_note = $request->issue_note;
         $issue->user_id = Auth::id();
-        $issue->task_id = $request->user_id;
+        $issue->task_id = $request->task_id;
         $issue->status = 0;
         $issue->save();
 
@@ -34,7 +34,7 @@ class IssueController extends Controller
         $issue->user_id = Auth::id();
         $issue->task_id = $request->user_id;
         $issue->status = 0;
-        $issue->save();
+        $issue->update();
 
         return response()->json(['success' => 1, 'message' => 'Issue created successfully.']);
     }
