@@ -130,26 +130,26 @@ $login_details = DB::table('users')->where('id', Auth::id())->where('is_active',
                                             </li>
                                         @endif
 
-                                        <li class="dropdown">
-                                            <a data-toggle="dropdown" class="dropdown-toggle">
-                                                {{--  <i class="fas fa-cog topheadermenu_icon"></i>  --}}
-                                                <img src="{{ asset('public/assets/images/brand/settings (2).png') }}"
-                                                    alt="img">
-                                                Setup
-                                                <span class="caret"></span>
-                                            </a>
-                                            <ul class=" dropdown-menu">
-                                                @if (auth()->user()->can('General Setting'))
+                                        @can(' General Setting')
+                                            <li class="dropdown">
+                                                <a data-toggle="dropdown" class="dropdown-toggle">
+                                                    {{--  <i class="fas fa-cog topheadermenu_icon"></i>  --}}
+                                                    <img src="{{ asset('public/assets/images/brand/settings (2).png') }}"
+                                                        alt="img">
+                                                    Setup
+                                                    <span class="caret"></span>
+                                                </a>
+                                                <ul class=" dropdown-menu">
                                                     <li>
                                                         <a href="{{ route('general_setting_details') }}"
                                                             class="navdropdwn_menuztext"><i
                                                                 class="fas fa-caret-right"></i>&nbsp;&nbsp;General
                                                             Setting</a>
                                                     </li>
-                                                @endif
+                                                </ul>
+                                            </li>
+                                        @endcan
 
-                                            </ul>
-                                        </li>
 
                                         <li class="dropdown">
                                             <a data-toggle="dropdown" class="dropdown-toggle">
@@ -165,36 +165,46 @@ $login_details = DB::table('users')->where('id', Auth::id())->where('is_active',
                                                             class="fas fa-caret-right"></i>&nbsp;&nbsp;Task
                                                         Category</a>
                                                 </li> --}}
+
+                                                @can('Taskcreate')
+                                                    <li>
+                                                        <a href="{{ route('create_task') }}"
+                                                            class="navdropdwn_menuztext"><i
+                                                                class="fas fa-caret-right"></i>&nbsp;&nbsp;Create
+                                                            Task</a>
+                                                    </li>
+                                                @endcan
+
+                                                @can('TaskView')
+                                                    <li>
+                                                        <a href="{{ route('task_list') }}"
+                                                            class="navdropdwn_menuztext"><i
+                                                                class="fas fa-caret-right"></i>&nbsp;&nbsp;Task
+                                                            List</a>
+                                                    </li>
+                                                @endcan
+
+                                                @can('ViewIssue')
+                                                    <li>
+                                                        <a href="{{ route('issue_list') }}"
+                                                            class="navdropdwn_menuztext"><i
+                                                                class="fas fa-caret-right"></i>&nbsp;&nbsp;Issue List</a>
+                                                    </li>
+                                                @endcan
+
                                                 <li>
                                                     <a href="{{ route('my_task') }}" class="navdropdwn_menuztext"><i
                                                             class="fas fa-caret-right"></i>&nbsp;&nbsp;My Task</a>
                                                 </li>
                                                 <li>
-                                                    <a href="{{ route('create_task') }}"
-                                                        class="navdropdwn_menuztext"><i
-                                                            class="fas fa-caret-right"></i>&nbsp;&nbsp;Create
-                                                        Task</a>
-                                                </li>
-                                                <li>
-                                                    <a href="{{ route('task_list') }}"
-                                                        class="navdropdwn_menuztext"><i
-                                                            class="fas fa-caret-right"></i>&nbsp;&nbsp;Task
-                                                        List</a>
-                                                </li>
-                                                <li>
                                                     <a href="{{ route('my_archive_task') }}"
                                                         class="navdropdwn_menuztext"><i
-                                                            class="fas fa-caret-right"></i>&nbsp;&nbsp;My Archive
+                                                            class="fas fa-caret-right"></i>&nbsp;&nbsp;Archive
                                                         Task</a>
                                                 </li>
                                                 <li>
                                                     <a href="{{ route('my_issue') }}" class="navdropdwn_menuztext"><i
                                                             class="fas fa-caret-right"></i>&nbsp;&nbsp;My Issue</a>
-                                                </li>
-                                                <li>
-                                                    <a href="{{ route('issue_list') }}"
-                                                        class="navdropdwn_menuztext"><i
-                                                            class="fas fa-caret-right"></i>&nbsp;&nbsp;Issue List</a>
                                                 </li>
                                             </ul>
                                         </li>
@@ -207,11 +217,13 @@ $login_details = DB::table('users')->where('id', Auth::id())->where('is_active',
                                                 <span class="caret"></span>
                                             </a>
                                             <ul class=" dropdown-menu">
-                                                <li>
-                                                    <a href="{{ route('all_leaves') }}"
-                                                        class="navdropdwn_menuztext"><i
-                                                            class="fas fa-caret-right"></i>&nbsp;&nbsp;All Leaves</a>
-                                                </li>
+                                                @can('LeaveView')
+                                                    <li>
+                                                        <a href="{{ route('all_leaves') }}"
+                                                            class="navdropdwn_menuztext"><i
+                                                                class="fas fa-caret-right"></i>&nbsp;&nbsp;All Leaves</a>
+                                                    </li>
+                                                @endcan
                                                 <li>
                                                     <a href="{{ route('apply_leave') }}"
                                                         class="navdropdwn_menuztext"><i
@@ -225,8 +237,15 @@ $login_details = DB::table('users')->where('id', Auth::id())->where('is_active',
                                             </ul>
                                         </li>
 
+                                        <li>
+                                            <a href="{{ route('create') }}">
+                                                <img src="{{ asset('public/assets/images/brand/file.png') }}"
+                                                    alt="img">&nbsp; Notes
+                                            </a>
+                                        </li>
 
-                                        @if (auth()->user()->can('User'))
+
+                                        @can('ManageRolePermission')
                                             <li class="dropdown">
                                                 <a data-toggle="dropdown" class="dropdown-toggle">
                                                     {{--  <i class="fas fa-user topheadermenu_icon"></i>  --}}
@@ -236,34 +255,19 @@ $login_details = DB::table('users')->where('id', Auth::id())->where('is_active',
                                                     <span class="caret"></span>
                                                 </a>
                                                 <ul class="dropdown-menu">
-                                                    @can('view role')
-                                                        <li>
-                                                            <a href="{{ route('roleList') }}"
-                                                                class="navdropdwn_menuztext"><i
-                                                                    class="fas fa-caret-right"></i>&nbsp;&nbsp;Role</a>
-                                                        </li>
-                                                    @endcan
-
-                                                    @can('view permission')
-                                                        <li>
-                                                            <a href="{{ route('PermissionList') }}"
-                                                                class="navdropdwn_menuztext"><i
-                                                                    class="fas fa-caret-right"></i>&nbsp;&nbsp;Permission</a>
-                                                        </li>
-                                                    @endcan
+                                                    <li>
+                                                        <a href="{{ route('roleList') }}" class="navdropdwn_menuztext"><i
+                                                                class="fas fa-caret-right"></i>&nbsp;&nbsp;Role</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="{{ route('PermissionList') }}"
+                                                            class="navdropdwn_menuztext"><i
+                                                                class="fas fa-caret-right"></i>&nbsp;&nbsp;Permission</a>
+                                                    </li>
 
                                                 </ul>
                                             </li>
-                                        @endif
-
-                                        <li>
-                                            <a href="{{ route('dashboard') }}">
-                                                {{--  <i class="fas fa-home topheadermenu_icon"></i>  --}}
-                                                <img src="{{ asset('public/assets/images/brand/file.png') }}"
-                                                    alt="img">
-                                                Notes
-                                            </a>
-                                        </li>
+                                        @endcan
 
                                     </ul>
                                 </div>

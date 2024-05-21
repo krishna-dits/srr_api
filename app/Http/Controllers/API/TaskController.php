@@ -235,7 +235,7 @@ class TaskController extends Controller
 
     public function delete_task(Request $request)
     {
-        Issue::whereTaskId($request->id)->withTrashed()->delete();
+        Issue::whereTaskId($request->id)->delete();
         TaskReview::whereTaskId($request->id)->delete();
         Task::whereId($request->id)->delete();
         return response()->json(['success' => 1, 'message' => 'Task deleted successfully.'], 200);

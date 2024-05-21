@@ -74,7 +74,7 @@
                                         @php
                                             $task_user = [];
                                             if (isset($task)) {
-                                                $task_user = json_decode($task, true);
+                                                $task_user = json_decode($task->user_ids, true);
                                             }
                                         @endphp
 
@@ -91,6 +91,13 @@
                                             @error('user_ids')
                                                 <small class="text-danger">{{ $message }}</small>
                                             @enderror
+
+                                            @foreach ($task_user as $user)
+                                                @php
+                                                    $data = DB::table('users')->whereId($user)->first();
+                                                @endphp
+                                                <span>{{ $data->name }}</span>,
+                                            @endforeach
                                         </div>
 
                                         <div class="form-group col-md-3">
@@ -169,5 +176,4 @@
 
 
     </div>
-
 @endsection
